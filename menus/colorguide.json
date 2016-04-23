@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle colorguide",
+        "command": "colorguide:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "colorguide",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "colorguide:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
