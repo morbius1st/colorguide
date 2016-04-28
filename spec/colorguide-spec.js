@@ -15,7 +15,7 @@ describe('Colorguide', () => {
     activationPromise = atom.packages.activatePackage('colorguide');
   });
 
-  describe('when the colorguide:toggle event is triggered', () => {
+  describe('when the colorguide:show event is triggered', () => {
     it('hides and shows the modal panel', () => {
       // Before the activation event the view is not on the DOM, and no panel
       // has been created
@@ -23,7 +23,7 @@ describe('Colorguide', () => {
 
       // This is an activation event, triggering it will cause the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'colorguide:toggle');
+      atom.commands.dispatch(workspaceElement, 'colorguide:show');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -37,7 +37,7 @@ describe('Colorguide', () => {
 
         let colorguidePanel = atom.workspace.panelForItem(colorguideElement);
         expect(colorguidePanel.isVisible()).toBe(true);
-        atom.commands.dispatch(workspaceElement, 'colorguide:toggle');
+        atom.commands.dispatch(workspaceElement, 'colorguide:show');
         expect(colorguidePanel.isVisible()).toBe(false);
       });
     });
@@ -55,7 +55,7 @@ describe('Colorguide', () => {
 
       // This is an activation event, triggering it causes the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'colorguide:toggle');
+      atom.commands.dispatch(workspaceElement, 'colorguide:show');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -65,7 +65,7 @@ describe('Colorguide', () => {
         // Now we can test for view visibility
         let colorguideElement = workspaceElement.querySelector('.colorguide');
         expect(colorguideElement).toBeVisible();
-        atom.commands.dispatch(workspaceElement, 'colorguide:toggle');
+        atom.commands.dispatch(workspaceElement, 'colorguide:show');
         expect(colorguideElement).not.toBeVisible();
       });
     });

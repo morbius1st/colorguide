@@ -1,5 +1,5 @@
 {
   "atom-workspace": {
-    "ctrl-alt-o": "colorguide:toggle"
+    "ctrl-alt-o": "colorguide:show"
   }
 }

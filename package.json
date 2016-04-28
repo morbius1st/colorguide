@@ -1,18 +1,20 @@
 {
   "name": "colorguide",
   "main": "./lib/colorguide",
-  "version": "0.0.0",
-  "description": "A short description of your package",
+  "version": "0.1.0",
+  "description": "A colorguide to the current UI & Syntax colors",
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "colorguide:toggle"
+    "atom-workspace": "colorguide:show"
   },
-  "repository": "https://github.com/atom/colorguide",
+  "repository": "https://github.com/morbius1st/colorguide",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+        "atom-space-pen-views": "^2.0.0",
+        "underscore-plus": "^1.0.0"
   }
 }
