@@ -1,8 +1,67 @@
-// The ui-variables file is provided by base themes provided by Atom.
-//
-// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
-// for a full listing of what's available.
 @import "ui-variables";
+@import "syntax-variables";
+
 
 .colorguide {
+
+  .colorguide-panel {
+    background-color: @tool-panel-background-color;
+  }
+
+  overflow: auto;
+
+  .list-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .panels {
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+  }
+
+  .package-panel {
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    flex: 1;
+
+    .list-group {
+      overflow: hidden;
+    }
+
+    .inset-panel {
+      width: 100%;
+      // the main panel background color
+      background-color: rgb(30,30,30);
+    }
+
+    .panel-heading {
+        // the main panel heading's background color
+        background-color: rgb(50,50,50);
+    }
+  }
+
+  .timing {
+    margin-bottom: 10px;
+  }
+
+  h2 {
+      font-size: 1.5em;
+      line-height: 1.2;
+      margin: 1.75em 0 0 0;
+      color: @text-color-highlight;
+    }
+
+  p {
+      font-size: 1.2em;
+      margin: .5em 0 1em 0;
+  }
+
+  h3 {
+      font-size: 1.0em;
+      margin: .5em 0 1em 0;
+      color: rgb(120,120,120);
+  }
+
+
 }

@@ -1,0 +1,31 @@
+@import "ui-variables";
+@import "syntax-variables";
+@import "colors";
+
+.colorguide {
+
+    .is-color:before {
+        content: "";
+        display: inline-block;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 10px;
+        width: 20%;
+        border: 1px solid rgb(0,0,0);
+    }
+
+    .color(@variable) {
+        .is-color.@{variable}:before {
+          background-color: @@variable;
+      }
+    }
+
+  .color( text-color );
+  .color( text-color-subtle );
+  .color( ui-fg );
+
+  .color( true_red_50 );
+  .color( scrollbar-background-color );
+  .color( scrollbar-thumb-color );
+
+}
