@@ -5,7 +5,7 @@ class WindowPanelView extends View
   @content: ->
     @div class: 'tool-panel padded package-panel', =>
       @div class: 'inset-panel', =>
-        @div class: 'panel-heading', 'Startup Time'
+        @div class: 'panel-heading', 'Startup Time (x)'
         @div class: 'panel-body padded', =>
           @div class: 'timing', outlet: 'windowTiming', =>
             @span class: 'inline-block', 'Window load time'
