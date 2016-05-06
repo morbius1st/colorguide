@@ -8,6 +8,10 @@ class PackagePanelView extends View
         @div class: 'panel-heading', title
         @div class: 'panel-body padded', =>
           @div class: 'text-info', outlet: 'summary'
+          @div class: 'text-info', outlet: 'themeUITitle'
+          @div class: 'text-info', outlet: 'themeUIPath'
+          @div class: 'text-info', outlet: 'themeSyntaxTitle'
+          @div class: 'text-info', outlet: 'themeSyntaxPath'
           @ul class: 'list-group', outlet: 'list'
 
   addPackages: (packages, timeKey) ->
