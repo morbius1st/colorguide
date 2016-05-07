@@ -1,0 +1,43 @@
+@import "syntax-variables";
+@import "colors";
+//@import "colorguide";
+@import "colorguide-variables";
+
+//.colorguide [data-name="syntax-variables"] {
+.colorguide {
+
+  .color( true_red_500 );
+  .color( scrollbar-background-color );
+  .color( scrollbar-thumb-color );
+
+	.is-color:before {
+      content: "";
+      display: inline-block;
+      height: 20px;
+      vertical-align: middle;
+      width: 20%;
+			margin-right: 10px;
+			border: @cg-sample-border-width solid @cg-sample-border-color;
+  }
+
+  .color(@variable) {
+      .is-color.@{variable}:before {
+        background-color: @@variable;
+				margin-left: -10px;
+    }
+  }
+
+	.is-color-blank:before {
+		content: "";
+		display: inline-block;
+		height: 20px;
+		// vertical-align: middle;
+	}
+
+	.variable-group {
+		> h2 {
+			margin-bottom: 0;
+		}
+	}
+
+}
