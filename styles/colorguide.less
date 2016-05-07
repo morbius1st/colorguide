@@ -1,11 +1,11 @@
 @import "ui-variables";
 @import "syntax-variables";
-
+@import "colorguide-variables";
 
 .colorguide {
 
   .colorguide-panel {
-    background-color: @tool-panel-background-color;
+    background-color: @cg-panel-bg-color;
   }
 
   overflow: auto;
@@ -32,12 +32,13 @@
     .inset-panel {
       width: 100%;
       // the main panel background color
-      background-color: rgb(30,30,30);
+      background-color: @cg-inset-panel-bg-color;
+			padding: 0 0 0 10px
     }
 
     .panel-heading {
         // the main panel heading's background color
-        background-color: rgb(50,50,50);
+        background-color: @cg-inset-panel-bg-color;
     }
   }
 
@@ -49,19 +50,18 @@
       font-size: 1.5em;
       line-height: 1.2;
       margin: 1.75em 0 0 0;
-      color: @text-color-highlight;
+      color: @cg-h2-color;
     }
 
-  p {
-      font-size: 1.2em;
-      margin: .5em 0 1em 0;
-  }
-
   h3 {
-      font-size: 1.0em;
+      font-size: 1em;
       margin: .5em 0 1em 0;
-      color: rgb(120,120,120);
+      color: @cg-h3-color;
   }
 
+	  p {
+	      font-size: 1.2em;
+	      margin: .5em 0 1em 0;
+	  }
 
 }

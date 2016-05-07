@@ -1,0 +1,41 @@
+@import "ui-variables";
+@import "colorguide-variables";
+
+//.colorguide [data-name="ui-variables-text"] {
+.colorguide {
+
+  .is-color:before {
+      content: "";
+      display: inline-block;
+      height: 20px;
+      vertical-align: middle;
+      width: 20%;
+			margin-right: @cg-sample-margin-right;
+			border: @cg-sample-border-width solid @cg-sample-border-color;
+  }
+
+  .color(@variable) {
+      .is-color.@{variable}:before {
+        background-color: @@variable;
+				margin-left: @cg-sample-margin-left;
+    }
+  }
+
+	.is-color-blank:before {
+		content: "";
+		display: inline-block;
+		height: 20px;
+		//vertical-align: middle;
+	}
+
+  .color( text-color );
+  .color( text-color-subtle );
+  .color( ui-fg );
+
+	// saved: for syntax colors
+  // .color( true_red_500 );
+  // .color( scrollbar-background-color );
+  // .color( scrollbar-thumb-color );
+
+
+}
