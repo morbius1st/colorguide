@@ -1,20 +1,62 @@
 @import "syntax-variables";
 @import "colors";
-//@import "colorguide";
 @import "colorguide-variables";
 
-//.colorguide [data-name="syntax-variables"] {
 .colorguide {
 
+// Official Syntax Variables
+
+// General colors
+  .color( syntax-text-color );
+  .color( syntax-cursor-color );
+  .color( syntax-selection-color );
+  .color( syntax-selection-flash-color );
+  .color( syntax-background-color );
+
+// Guide colors
+  .color( syntax-wrap-guide-color );
+  .color( syntax-indent-guide-color );
+  .color( syntax-invisible-character-color );
+
+// For find and replace markers
+  .color( syntax-result-marker-color );
+  .color( syntax-result-marker-color-selected );
+
+// Gutter colors
+  .color( syntax-gutter-text-color );
+  .color( syntax-gutter-text-color-selected );
+  .color( syntax-gutter-background-color );
+  .color( syntax-gutter-background-color-selected );
+
+// Git colors - For git diff info. i.e. in the gutter
+  .color( syntax-color-renamed );
+  .color( syntax-color-added );
+  .color( syntax-color-modified );
+  .color( syntax-color-removed );
+
+// For language entity colors
+  .color( syntax-color-variable );
+  .color( syntax-color-constant );
+  .color( syntax-color-property );
+  .color( syntax-color-value );
+  .color( syntax-color-function );
+  .color( syntax-color-method );
+  .color( syntax-color-class );
+  .color( syntax-color-keyword );
+  .color( syntax-color-tag );
+  .color( syntax-color-attribute );
+  .color( syntax-color-import );
+  .color( syntax-color-snippet );
+
+// testing---
   .color( true_red_500 );
   .color( scrollbar-background-color );
   .color( scrollbar-thumb-color );
 	.color( scrollbar-color-editor );
-	// .color( scrollbar-background-color-editor );
-	// .color( scrollbar-corner-color );
-	// .color( scrollbar-corner-color-editor );
-	// .color( scrollbar-thumb-color-editor );
-
+	.color( scrollbar-background-color-editor );
+	.color( scrollbar-corner-color );
+	.color( scrollbar-corner-color-editor );
+	.color( scrollbar-thumb-color-editor );
 
 	.is-color:before {
       content: "";
@@ -30,20 +72,19 @@
       .is-color.@{variable}:before {
         background-color: @@variable;
 				margin-left: -10px;
-    }
+      }
   }
 
 	.is-color-blank:before {
 		content: "";
 		display: inline-block;
-		height: 20px;
-		// vertical-align: middle;
+		height: 10px;
 	}
-
-	.variable-group {
-		> h2 {
-			margin-bottom: 0;
-		}
-	}
+  //
+	// .variable-group {
+	// 	> h2 {
+	// 		margin-bottom: 0;
+	// 	}
+	// }
 
 }

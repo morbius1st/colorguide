@@ -6,7 +6,7 @@ class ColorguideSyntaxView extends View
     @div class: 'tool-panel padded package-panel', =>
       @div class: 'inset-panel', =>
         @h2 'Syntax Theme Colors'
-       	@h3 outlet: 'title'
+        @h3 outlet: 'title'
         @div class: 'panel-body padded', =>
           @raw '''
             <div class="is-color scrollbar-background-color">@scrollbar-background-color</div>

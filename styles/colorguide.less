@@ -6,6 +6,9 @@
 	// position: ralative;
 	// overflow: auto;
 
+  .padded-right {
+    padding-right: 10px;
+  }
 
   .colorguide-panel {
     background-color: @cg-panel-bg-color;
@@ -18,25 +21,37 @@
     margin-bottom: 10px;
   }
 
+  .list-color {
+    margin: -4px 0 0 0;
+  }
+
   .panels {
     display: -webkit-flex;
     -webkit-flex-direction: row;
+  }
+
+  .list-group {
+    overflow: hidden;
+  }
+
+  .padded {
+    padding: 4px 2px 4px 2px;
   }
 
   .package-panel {
     display: -webkit-flex;
     -webkit-flex-direction: row;
     flex: 1;
-
-    .list-group {
-      overflow: hidden;
-    }
+    //
+    // .list-group {
+    //   overflow: hidden;
+    // }
 
     .inset-panel {
       width: 100%;
       // the main panel background color
       background-color: @cg-inset-panel-bg-color;
-			padding: 0 0 0 10px
+			padding: 5px 10px 10px 10px
     }
 
     .panel-heading {
@@ -49,22 +64,86 @@
     margin-bottom: 10px;
   }
 
+  .header-highlight {
+    height: 30px;
+    background-color: rgb(120,120,120);
+    padding-left: 5px;
+    padding-top: 2px;
+  }
+
   h2 {
-      font-size: 1.5em;
+      font-size: 2.2em;
       line-height: 1.2;
-      margin: 1.75em 0 0 0;
+      margin: 0 0 0 0;
       color: @cg-h2-color;
     }
 
   h3 {
-      font-size: 1em;
+      font-size: 1.2em;
       margin: .5em 0 1em 0;
       color: @cg-h3-color;
   }
 
   p {
-      font-size: 1.2em;
+      font-size: 1.0em;
       margin: .5em 0 1em 0;
   }
+
+  .btn-section-header {
+    background-color: rgb(70,70,70);
+    border-style: none;
+    width: 100%;
+    text-align: left;
+    font-size: 1.2em;
+    padding-left: 5px;
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 7px;
+  }
+
+  .btn-division-header {
+    background-color: @cg-inset-panel-bg-color;
+    // width: 100%;
+    text-align: left;
+    font-size: 1.5em;
+    padding-left: 5px;
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    outline: none;
+    display: block;
+    border: none;
+  }
+
+  .btn:active {
+    outline: none;
+    border: none;
+    background-color: @cg-btn-section-bg-color;
+  }
+
+  .bar {
+    height: 1px;
+    background-color: @cg-btn-division-bg-color;
+    width: 100%;
+    display: block;
+    margin-top: 35px;
+    margin-bottom: -18px;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .bordered {
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 0px;
+    margin-top: 5px;
+    //margin-top: -10px;
+  }
+
 
 }
