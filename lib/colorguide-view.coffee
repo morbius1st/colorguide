@@ -11,13 +11,13 @@ class ColorguideView extends ScrollView
     @div class: 'colorguide pane-item native-key-bindings', tabindex: -1, =>
       @div class: 'colorguide-panel', =>
         @div class: 'panels', =>
-          @subview 'colorguideUiView', new ColorguideUiView()
+          # @subview 'colorguideUiView', new ColorguideUiView()
           # @subview 'colorguideSyntaxView', new ColorguideSyntaxView()
           @subview 'colorguideListView', new ColorguideListView()
 
   initialize: ({@uri}) ->
     ThemePathUi = @getActiveUiTheme()
-    @colorguideUiView.title.text """UI Theme Path: #{ThemePathUi}"""
+    # @colorguideUiView.title.text """UI Theme Path: #{ThemePathUi}"""
 
     ThemePathSyntax = @getActiveSyntaxTheme()
     # @colorguideSyntaxView.title.text """Syntax Theme Path: #{ThemePathSyntax}"""

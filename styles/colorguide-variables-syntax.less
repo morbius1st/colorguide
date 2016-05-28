@@ -5,7 +5,6 @@
 .colorguide {
 
 // Official Syntax Variables
-
 // General colors
   .color( syntax-text-color );
   .color( syntax-cursor-color );
@@ -34,7 +33,8 @@
   .color( syntax-color-modified );
   .color( syntax-color-removed );
 
-// For language entity colors
+// For basic language entity colors
+//
   .color( syntax-color-variable );
   .color( syntax-color-constant );
   .color( syntax-color-property );
@@ -48,43 +48,32 @@
   .color( syntax-color-import );
   .color( syntax-color-snippet );
 
-// testing---
-  .color( true_red_500 );
-  .color( scrollbar-background-color );
-  .color( scrollbar-thumb-color );
-	.color( scrollbar-color-editor );
-	.color( scrollbar-background-color-editor );
-	.color( scrollbar-corner-color );
-	.color( scrollbar-corner-color-editor );
-	.color( scrollbar-thumb-color-editor );
+// custom
+//
+ .color( bracket-matcher-border-color );
 
-	.is-color:before {
-      content: "";
-      display: inline-block;
-      height: 20px;
-      vertical-align: middle;
-      width: 20%;
-			margin-right: 10px;
-			border: @cg-sample-border-width solid @cg-sample-border-color;
-  }
+  // .color( syntax-cursor-line );
+  // .color( syntax-deprecated-fg );
+  // .color( syntax-deprecated-bg );
+  // .color( syntax-illegal-fg );
+  // .color( syntax-illegal-bg );
+  //
+	// .is-color:before {
+  //   content: "";
+  //   display: inline-block;
+  //   height: 60px;
+  //   vertical-align: middle;
+  //   width: 20%;
+	// 	margin-right: 10px;
+	// 	border: @cg-sample-border-width solid @cg-sample-border-color;
+  // }
 
   .color(@variable) {
       .is-color.@{variable}:before {
         background-color: @@variable;
-				margin-left: -10px;
       }
-  }
-
-	.is-color-blank:before {
-		content: "";
-		display: inline-block;
-		height: 10px;
-	}
-  //
-	// .variable-group {
-	// 	> h2 {
-	// 		margin-bottom: 0;
-	// 	}
-	// }
-
+      .is-color2.@{variable} {
+        background-color: @@variable;
+      }
+    }
 }

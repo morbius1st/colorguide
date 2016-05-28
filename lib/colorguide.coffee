@@ -1,5 +1,7 @@
 ColorguideView = null
+cgView = null
 ColorguideViewURI = 'atom://colorguide'
+$ = jQuery = require 'jquery'
 
 module.exports =
     activate: ->

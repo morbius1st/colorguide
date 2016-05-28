@@ -3,8 +3,7 @@
 @import "colorguide-variables";
 
 .colorguide {
-	// position: ralative;
-	// overflow: auto;
+	overflow: auto;
 
   .padded-right {
     padding-right: 10px;
@@ -14,24 +13,95 @@
     background-color: @cg-panel-bg-color;
   }
 
-  overflow: auto;
+  .list-group {
+    overflow: hidden;
+    margin-top: 10px;
+  }
 
   .list-item {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    display: inline-block;
+    padding: 0 0 0 0;
+    vertical-align: top;
+
+    // margin-top: 10px;
+    // margin-bottom: 10px;
   }
 
   .list-color {
-    margin: -4px 0 0 0;
+    margin: 0 0 12px 0;
   }
+
+  .list-color-top-border {
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+  .is-color:before {
+    content: "";
+    display: inline-block;
+    height: 40px;
+    vertical-align: top;
+    width: 20%;
+		margin-right: 10px;
+    margin-bottom: 4px;
+		border: @cg-sample-border-width solid @cg-sample-border-color;
+  }
+
+  .is-color2 {
+  }
+
+  .is-color-style {
+    display: inline-block;
+    vertical-align: top;
+    height: 49px;
+    width: 49px;
+  }
+
+  .is-color-block {
+    .is-color-style;
+		margin-right: 10px;
+		border: @cg-sample-border-width solid @cg-sample-border-color;
+  }
+
+  .is-color-preface {
+    .is-color-style;
+		margin-right: 4px;
+  }
+
+  .is-color-bar {
+    height: 13px;
+    border-width: 6px 0 6px 0;
+    border-style: solid;
+  }
+
+  .is-color-bar-top {
+    border-color: white;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    .is-color-bar;
+  }
+
+  .is-color-bar-mid {
+    border-color: grey;
+    margin-bottom: 5px;
+    .is-color-bar;
+  }
+
+  .is-color-bar-bot {
+    border-color: black;
+    .is-color-bar;
+  }
+
+	.is-color-blank:before {
+		content: "";
+		display: inline-block;
+		height: 20px;
+		//vertical-align: middle;
+	}
 
   .panels {
     display: -webkit-flex;
     -webkit-flex-direction: row;
-  }
-
-  .list-group {
-    overflow: hidden;
   }
 
   .padded {
@@ -89,16 +159,9 @@
       margin: .5em 0 1em 0;
   }
 
-  .btn-section-header {
-    background-color: rgb(70,70,70);
-    border-style: none;
-    width: 100%;
-    text-align: left;
-    font-size: 1.2em;
-    padding-left: 5px;
-    color: white;
-    margin-top: 15px;
-    margin-bottom: 7px;
+  pre {
+      font-family: '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+      background-color: rgba(0, 0, 0, 0)
   }
 
   .btn-division-header {
@@ -114,6 +177,20 @@
     outline: none;
     display: block;
     border: none;
+  }
+
+  .btn-section-header {
+    background-color: rgb(70,70,70);
+    border-style: none;
+    width: 100%;
+    text-align: left;
+    font-size: 1.2em;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    color: white;
+    margin-top: 10px;
+    // margin-bottom: 7px;
   }
 
   .btn:active {
@@ -144,6 +221,5 @@
     margin-top: 5px;
     //margin-top: -10px;
   }
-
 
 }

@@ -4,29 +4,12 @@
 //.colorguide [data-name="ui-variables-text"] {
 .colorguide {
 
-  .is-color:before {
-      content: "";
-      display: inline-block;
-      height: 20px;
-      vertical-align: middle;
-      width: 20%;
-			margin-right: 10px;
-			border: @cg-sample-border-width solid @cg-sample-border-color;
-  }
-
   .color(@variable) {
       .is-color.@{variable}:before {
         background-color: @@variable;
 				margin-left: -10px;
     }
   }
-
-	.is-color-blank:before {
-		content: "";
-		display: inline-block;
-		height: 20px;
-		//vertical-align: middle;
-	}
 
   .color( text-color );
   .color( text-color-subtle );
