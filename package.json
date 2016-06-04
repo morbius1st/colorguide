@@ -18,5 +18,12 @@
         "underscore-plus": "^1.0.0",
         "jquery": "^2.1.4",
         "cs-dark-syntax": "^0.0.0"
+  },
+  "consumedServices": {
+    "themeVariables": {
+      "versions": {
+        ">=0.0.0": "consumeThemeVars"
+      }
+    }
   }
 }
