@@ -1,6 +1,6 @@
 'use babel';
 
-import ColorguideView from '../lib/colorguide-view';
+import ColorguideView from '../lib/cg-view';
 
 describe('ColorguideView', () => {
   it('has one valid test', () => {

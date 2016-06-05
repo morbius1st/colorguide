@@ -1,8 +1,6 @@
 {$$, View} = require 'atom-space-pen-views'
 $ = jQuery = require 'jquery'
 
-# sV = require'C:/Users/Jeff/.atom/packages/cs-dark-syntax/lib/syntax-variables-cg'
-
 module.exports =
 class ColorguideListView extends View
   @content: ->
@@ -33,8 +31,6 @@ class ColorguideListView extends View
                 @div id: "li2x", class: 'is-color-block is-color2 syntax-cursor-color'
                 @div class: 'list-item', =>
                   @pre id: "li2", class: 'list-item', '@syntax-cursor-color'
-
-
 
 
             @ul id: 'genColors', class: 'list-group', =>

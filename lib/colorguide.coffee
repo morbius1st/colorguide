@@ -11,10 +11,8 @@ module.exports =
       atom.commands.add 'atom-workspace', 'colorguide:show', ->
           atom.workspace.open(ColorguideViewURI)
 
-      window.alert('typeof: ' + typeof @cgVar)
-
   createColorguideView: (state) ->
-      ColorguideView ?= require './colorguide-view'
+      ColorguideView ?= require './cg-view'
       new ColorguideView(state)
 
   consumeThemeVars: (options={}) ->

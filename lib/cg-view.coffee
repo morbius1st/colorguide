@@ -1,9 +1,9 @@
 _ = require 'underscore-plus'
 {Disposable} = require 'atom'
 {ScrollView} = require 'atom-space-pen-views'
-ColorguideUiView = require './colorguide-ui-view'
-ColorguideSyntaxView = require './colorguide-syntax-view'
-ColorguideListView = require './colorguide-list-view'
+ColorguideUiView = require './cg-ui-view'
+ColorguideSyntaxView = require './cg-syntax-view'
+ColorguideListView = require './cg-list-view'
 
 module.exports =
 class ColorguideView extends ScrollView
