@@ -1,8 +1,16 @@
 {$$, View} = require 'atom-space-pen-views'
 $ = jQuery = require 'jquery'
 
+require './space-pen-extensions'
+
+cgSyntaxVariablesReqd = require './cg-variables-syntax-required'
+colorUtil = require './color-util'
+
 module.exports =
 class ColorguideListView extends View
+
+  itemInfo = null
+
   @content: ->
     @div class: 'tool-panel padded package-panel', =>
       @div class: 'inset-panel', =>
@@ -15,22 +23,30 @@ class ColorguideListView extends View
 
             @button 'data-name': 'genColors', class: 'btn btn-section-header syntax-cursor-color', click: 'toggle', 'General Color'
             @ul outlet: 'list', class: 'list-group', =>
-              @li class: 'list-color', =>
-                @div class: 'is-color-preface', =>
-                  @div class: 'is-color2 syntax-text-color is-color-bar-top'
-                  @div class: 'is-color2 syntax-text-color is-color-bar-mid'
-                  @div class: 'is-color2 syntax-text-color is-color-bar-bot'
-                @div id: "li1x", class: 'is-color-block is-color2 syntax-text-color'
-                @div class: 'list-item', =>
-                  @pre id: "li1", class: 'list-item', '@syntax-text-color'
-              @li class: 'list-color', =>
-                @div class: 'is-color-preface', =>
-                  @div class: 'is-color2 syntax-cursor-color is-color-bar-top'
-                  @div class: 'is-color2 syntax-cursor-color is-color-bar-mid'
-                  @div class: 'is-color2 syntax-cursor-color is-color-bar-bot'
-                @div id: "li2x", class: 'is-color-block is-color2 syntax-cursor-color'
-                @div class: 'list-item', =>
-                  @pre id: "li2", class: 'list-item', '@syntax-cursor-color'
+              itemInfo = @addListItems()
+
+
+            # @ul outlet: 'list', class: 'list-group', =>
+            #   @li class: 'list-color', =>
+            #     @div class: 'is-color-preface', =>
+            #       @div class: 'is-color2 syntax-text-color is-color-bar-top'
+            #       @div class: 'is-color2 syntax-text-color is-color-bar-mid'
+            #       @div class: 'is-color2 syntax-text-color is-color-bar-bot'
+            #       @div class: 'is-color2 syntax-text-color is-color-bar-bkg'
+            #     @div id: "li1x", class: 'is-color-block is-color2 syntax-text-color'
+            #     @div class: 'list-item', =>
+            #       @pre id: "li1", class: 'list-item', '@syntax-text-color'
+            #   @li class: 'list-color', =>
+            #     @div class: 'is-color-preface', =>
+            #       @div class: 'is-color2 syntax-cursor-color is-color-bar-top'
+            #       @div class: 'is-color2 syntax-cursor-color is-color-bar-mid'
+            #       @div class: 'is-color2 syntax-cursor-color is-color-bar-bot'
+            #       @div class: 'is-color2 syntax-text-color is-color-bar-bkg'
+            #     @div id: "li2x", class: 'is-color-block is-color2 syntax-cursor-color'
+            #     @div class: 'list-item', =>
+            #       @p class: 'variable-name', '@syntax-cursor-color'
+            #       @p 'this is a test'
+            #       @p id: "li2", ' '
 
 
             @ul id: 'genColors', class: 'list-group', =>
@@ -125,92 +141,130 @@ class ColorguideListView extends View
               @li class: 'list-color',  =>
                 @div class: 'is-color bracket-matcher-border-color', attached: 'winLoad', '@bracket-matcher-border-color'
 
-              # @li class: 'list-color', =>
-              #   @div class: 'is-color syntax-deprecated-fg', '@syntax-deprecated-fg'
-              # @li class: 'list-color', =>
-              #   @div class: 'is-color syntax-deprecated-bg', '@syntax-deprecated-bg'
-              # @li class: 'list-color', =>
-              #   @div class: 'is-color syntax-illegal-fg', '@syntax-illegal-fg'
-              # @li class: 'list-color', =>
-              #   @div class: 'is-color syntax-illegal-bg', '@syntax-illegal-bg'
 
-          # @raw '''
-          #   <ul class='list-group'>
-          #     <li class='list-item text-info'>This is text - line 1</li>
-          #     <li class='list-item'>
-          #       <span>This is text - line 2</span>
-          #     </li>
-          # '''
 
-  synVars2 =
-    [
-      ['li3', 'syntax-selection-color']
-      ['li4', 'syntax-selection-flash-color']
-    ]
+    # window.alert('prefix: ' + @itemInfo.itemPrefix + ' count: ' + @itemInfo.itemCount, "item info")
 
   initialize: ->
+    # editorBgColor = @formatHexColor(@getRGBfromString(@getEditorBgColor()))
 
-    # message = ""
-    # for a in synVars2
-    #   message += 'a: ' + a[0] + ' b: ' + a[1] + '\n'
-    #
-    # window.alert(sV.length)
+  getEditorBgColor: () =>
+    editors = atom.workspace.getTextEditors()
 
+    for i in [0 ... editors.length] by 1
+      editor = atom.views.getView(editors[i])
+      edBgColor = window.getComputedStyle(editor).getPropertyValue('background-color')
+      if edBgColor.length > 0
+        return edBgColor
+
+    # return a default value of black if nothing found
+    '#000000'
   #
-  # getColorVariables: ->
-  #   for (i = 0; i < document.styleSheets.length; i++) {
-  #       a = document.styleSheets[i].cssRules;
-  #       for (j = 0; j < a.length; j++) {
-  #         b=a[j].selectorText;
-  #         if (b !== undefined && b.startsWith(".theme-syntax")) {
-  #           console.log(b);
-  #         }
-  #       }
-  #     }
+  # addListItem: () ->
+  #   cgGroupHeaders = cgSyntaxVariablesReqd.syntaxVarsReqdHeaders()
+  #   cgSyntaxVarsReqd  = cgSyntaxVariablesReqd.syntaxVarsReqd()
+  #
+  #   message = ''
+  #
+  #   itemIdPrefix = 'reqd'
+  #   itemIdCode = 1
+  #
+  #   if cgSyntaxVarsReqd.variables?
+  #     (cgSyntaxVarsReqd.variables).sort((a, b) -> a.order - b.order)
+  #     for {order, variablegroup, variablename, variabledesc, bkgcolortop, bkgcolormid, bkgcolorbot} in cgSyntaxVarsReqd.variables
+  #         cgGroupHeaderText = cgGroupHeaders[variablegroup].description
+  #         itemId = itemIdPrefix + itemIdCode
+  #         @addListItemBlock(itemId, variablename, variabledesc)
+  #         itemIdCode++
+  #
+  #   else
+  #     {order, variablegroup, variablename, variabledesc, bkgcolortop, bkgcolormid, bkgcolorbot} = cgSyntaxVarsReqd
+  #     cgGroupHeaderText = cgGroupHeaders[variablegroup].description
+  #     itemId = itemIdPrefix + itemIdCode
+  #     message += itemId + ' <> ' + variablename + ' <> ' + cgVariableNameText
+  #     @addListItemBlock(itemId, variablename, variabledesc)
+  #
+  # addListItemBlock: (itemId, variableName, variableDesc) ->
+  #
+  #   li = document.createElement("li")
+  #   li.className = "list-color"
+  #   html = """
+  #     <div class="is-color-preface">
+  #       <div class="cg-#{variableName} is-color-bar-top"></div>
+  #       <div class="cg-#{variableName} is-color-bar-mid"></div>
+  #       <div class="cg-#{variableName} is-color-bar-bot"></div>
+  #       <div class="cg-#{variableName} is-color-bar-bkg" style = 'border-color: #{editorBgColor}'"></div>
+  #     </div>
+  #     <div id="#{itemId}x" class="is-color-block cg-#{variableName}"></div>
+  #     <div class="list-item">
+  #       <p class="variable-name">#{variableName}</p>
+  #       <p>#{variableDesc}</p>
+  #       <p id="#{itemId}"></p>
+  #     </div>
+  #   """
+  #   li.innerHTML = html
+  #
+  #   @list.append(li)
+  #
+  #   @winTest2('#' + itemId)
+  #
+  #
+  # addListItem2: () ->
+  #   cgGroupHeaders = cgSyntaxVariablesReqd.syntaxVarsReqdHeaders()
+  #   cgSyntaxVarsReqd  = cgSyntaxVariablesReqd.syntaxVarsReqd()
+  #
+  #   message = ''
+  #
+  #   itemIdPrefix = 'reqd'
+  #   itemIdCode = 1
+  #
+  #   # window.alert("header: " + cgGroupHeaders)
+  #
+  #   if cgSyntaxVarsReqd.variables?
+  #     (cgSyntaxVarsReqd.variables).sort((a, b) -> a.order - b.order)
+  #     for {order, variablegroup, variablename, variabledesc, bkgcolortop, bkgcolormid, bkgcolorbot} in cgSyntaxVarsReqd.variables
+  #         cgGroupHeaderText = cgGroupHeaders[variablegroup].description
+  #         itemId = itemIdPrefix + itemIdCode
+  #         #
+  #         # message += cgGroupHeaderText + ' <> '+ variablename + ' <> ' + variabledesc + '\n'
+  #
+  #         # # @addListItemBlock(itemId, variableName, variableDesc)
+  #         # #
+  #         html = '''
+  #           <div class="is-color-preface">
+  #             <div class="cg-#{variablename} is-color-bar-top"></div>
+  #             <div class="cg-#{variablename} is-color-bar-mid"></div>
+  #             <div class="cg-#{variablename} is-color-bar-bot"></div>
+  #             <div class="cg-#{variablename} is-color-bar-bkg" style = 'border-color: #{editorBgColor}'"></div>
+  #           </div>
+  #           <div id="#{itemId}x" class="is-color-block cg-#{variablename}"></div>
+  #           <div class="list-item">
+  #             <p class="variable-name">#{variablename}</p>
+  #             <p>#{variabledesc}</p>
+  #             <p id="#{itemId}"></p>
+  #           </div>
+  #         '''
+  #         @addListItemBlock2(html)
+  #
+  #         itemIdCode++
+  #
+  #     # window.alert(message)
+  #
+  #   else
+  #     {order, variablegroup, variablename, variabledesc, bkgcolortop, bkgcolormid, bkgcolorbot} = cgSyntaxVarsReqd
+  #     cgGroupHeaderText = cgGroupHeaders[variablegroup].description
+  #     itemId = itemIdPrefix + itemIdCode
+  #     message += itemId + ' <> ' + variablename + ' <> ' + cgVariableNameText
+  #
+  #     @addListItemBlock(itemId, variablename, variabledesc)
+  #
+  #
+  # addListItemBlock2: (html) ->
+  #   @div 'this is a test'
+  #
+  #   # @li class: 'list-color', =>
+  #   #   @raw html
 
-  addListItem: ->
-    # message = ""
-    # for colorItem in synVars2
-    #   message += "a: #{colorItem[0]}  b: #{colorItem[1]}\n"
-    #
-    # window.alert(message)
-    #
-
-    for colorItem in synVars2
-      li = document.createElement("li")
-      li.className = "list-color"
-      html = """
-        <div class="is-color-preface">
-          <div class="cg-#{colorItem[1]} is-color-bar-top"></div>
-          <div class="cg-#{colorItem[1]} is-color-bar-mid"></div>
-          <div class="cg-#{colorItem[1]} is-color-bar-bot"></div>
-        </div>
-        <div id="#{colorItem[0]}x" class="is-color-block cg-#{colorItem[1]}"></div>
-        <div class="list-item">
-          <pre id="#{colorItem[0]}" class="list-item">@#{colorItem[1]}</pre>
-        </div>
-      """
-      li.innerHTML = html
-
-      @list.append(li)
-
-    # for colorItem in synVars2
-    #   li = document.createElement("li")
-    #   li.className = "list-color"
-    #   html = """
-    #     <div class="is-color-preface">
-    #       <div class="is-color2 theme-#{colorItem[1]} is-color-bar-top"></div>
-    #       <div class="is-color2 theme-#{colorItem[1]} is-color-bar-mid"></div>
-    #       <div class="is-color2 theme-#{colorItem[1]} is-color-bar-bot"></div>
-    #     </div>
-    #     <div id="#{colorItem[0]}x" class="is-color-block is-color2 theme-#{colorItem[1]}"></div>
-    #     <div class="list-item">
-    #       <pre id="#{colorItem[0]}" class="list-item">@#{colorItem[1]}</pre>
-    #     </div>
-    #   """
-    #   li.innerHTML = html
-    #
-    #   @list.append(li)
 
   toggle: (event, element) ->
     leId = '#' + element.attr('data-name')
@@ -219,42 +273,68 @@ class ColorguideListView extends View
       $(leId).removeClass('hide')
     else
       $(leId).addClass('hide')
+  #
+  # toHexString: (decString) ->
+  #   hexStr = parseInt(decString).toString(16)
+  #   if (hexStr.length % 2 != 0) then hexStr = '0' + hexStr
+  #   hexStr.toUpperCase();
+  #
+  #
+  # getRGBfromString: (rgbString) =>
+  #   strSpace = String.fromCharCode(160)
+  #   lPren = 4
+  #   comma1 = rgbString.indexOf(",", lPren + 1)
+  #   comma2 = rgbString.indexOf(",", comma1 + 1)
+  #   rPren = rgbString.indexOf(")", comma2 + 1)
+  #   R = rgbString.slice(lPren, comma1)
+  #   G = rgbString.slice(comma1 + 2, comma2)
+  #   B = rgbString.slice(comma2 + 2, rPren)
+  #   {R: R, G: G, B: B}
+  #
+  # formatRGBcolor: (RGB) ->
+  #   RGB.R + ' , ' + RGB.G + ' , ' + RGB.B
+  #
+  # formatHexColor: (RGB) =>
+  #   "#" + @toHexString(RGB.R) + @toHexString(RGB.G) + @toHexString(RGB.B)
+  #
+  # winTest: (elem) ->
+  #   bgColor = @formatColor(window.getComputedStyle(document.querySelector(elem), ':before').getPropertyValue('background-color'))
+  #   elemText = $(elem).text() + @addSpaces(5) + bgColor
+  #   $(elem).text(elemText)
+  #
+  # winTest2: (elem) =>
+  #   bgColor = @formatColor($(elem + 'x').css('background-color'))
+  #   elemText = $(elem).text() + "\n" + bgColor
+  #   $(elem).text(elemText)
+  #
+  # formatColor: (rgbString) ->
+  #   RGB = @getRGBfromString(rgbString)
+  #   @formatHexColor(RGB)  + @addSpaces(5) + @formatRGBcolor(RGB)
+  #
+  # addSpaces: (amount) ->
+  #   (String.fromCharCode(160)).repeat(amount)
 
-  toHexString: (decString) ->
-    hexStr = parseInt(decString).toString(16)
-    if (hexStr.length % 2 != 0) then hexStr = '0' + hexStr
-    hexStr.toUpperCase();
 
-  addSpaces: (amount) ->
-    (String.fromCharCode(160)).repeat(amount)
-
-  formatColor: (rgbString) ->
-    strSpace = String.fromCharCode(160)
-    lPren = 4
-    comma1 = rgbString.indexOf(",", lPren + 1)
-    comma2 = rgbString.indexOf(",", comma1 + 1)
-    rPren = rgbString.indexOf(")", comma2 + 1)
-    R = rgbString.slice(lPren, comma1)
-    G = rgbString.slice(comma1 + 2, comma2)
-    B = rgbString.slice(comma2 + 2, rPren)
-    "#" + @toHexString(R) + @toHexString(G) + @toHexString(B) + @addSpaces(5) + R + ' , ' + G + ' , ' + B
-
-  winTest: (elem) ->
-    bgColor = @formatColor(window.getComputedStyle(document.querySelector(elem), ':before').getPropertyValue('background-color'))
-    elemText = $(elem).text() + @addSpaces(5) + bgColor
+  winTest3: (elem) ->
+    bgColor = $(elem + 'x').css('background-color')
+    # window.alert(elem + ' : ' + bgColor,'element - color')
+    bgColor = colorUtil.formatColor(bgColor)
+    elemText = $(elem).text() + '\n' + bgColor
     $(elem).text(elemText)
 
-  winTest2: (elem) ->
-    bgColor = @formatColor($(elem + 'x').css('background-color'))
-    # bgColor = ($(elem + 'x').css('background-color'))
-    elemText = $(elem).text() + "\n" + bgColor
-    $(elem).text(elemText)
+
 
   attached: ->
-    @addListItem()
-    @winTest2('#li1')
-    @winTest2('#li2')
-    @winTest2('#li3')
-    @winTest2('#li4')
-    @winTest('#li5')
-    @winTest('#li6')
+    # window.alert('prefix: ' + itemInfo.itemPrefix + ' count: ' + itemInfo.itemCount, "item info")
+
+    for i in [1 ... itemInfo.itemCount] by 1
+      @winTest3('#' + itemInfo.itemPrefix + i)
+
+
+    # @addListItem()
+    # @winTest2('#li1')
+    # @winTest2('#li2')
+    # @winTest2('#reqd1')
+    # @winTest2('#li4')
+    # @winTest('#li5')
+    # @winTest('#li6')

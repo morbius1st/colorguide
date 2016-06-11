@@ -2,6 +2,64 @@
 @import "colors";
 @import "cg-variables";
 
+// editor and text colors
+.cg-syntax-text-color {background-color: @syntax-text-color}
+.cg-syntax-cursor-color {background-color: @syntax-cursor-color}
+.cg-syntax-selection-color {background-color: @syntax-selection-color}
+.cg-syntax-selection-flash-color {background-color: @syntax-selection-flash-color}
+.cg-syntax-background-color {background-color: @syntax-background-color}
+.cg-syntax-invisible-character-color {background-color: @syntax-invisible-character-color}
+// guide colors
+.cg-syntax-wrap-guide-color {background-color: @syntax-wrap-guide-color}
+.cg-syntax-indent-guide-color {background-color: @syntax-indent-guide-color}
+// gutter colors
+.cg-syntax-gutter-text-color  {background-color: @syntax-gutter-text-color}
+.cg-syntax-gutter-text-color-selected {background-color: @syntax-gutter-text-color-selected}
+.cg-syntax-gutter-background-color  {background-color: @syntax-gutter-background-color}
+.cg-syntax-gutter-background-color-selected {background-color: @syntax-gutter-background-color-selected}
+// For git diff info. i.e. in the gutter
+.cg-syntax-color-renamed  {background-color: @syntax-color-renamed}
+.cg-syntax-color-added  {background-color: @syntax-color-added}
+.cg-syntax-color-modified {background-color: @syntax-color-modified}
+.cg-syntax-color-removed  {background-color: @syntax-color-removed}
+// for language entity colors
+.cg-syntax-color-variable {background-color: @syntax-color-variable}
+.cg-syntax-color-constant {background-color: @syntax-color-constant}
+.cg-syntax-color-property {background-color: @syntax-color-property}
+.cg-syntax-color-value  {background-color: @syntax-color-value}
+.cg-syntax-color-function {background-color: @syntax-color-function}
+.cg-syntax-color-method {background-color: @syntax-color-method}
+.cg-syntax-color-class  {background-color: @syntax-color-class}
+.cg-syntax-color-keyword  {background-color: @syntax-color-keyword}
+.cg-syntax-color-tag  {background-color: @syntax-color-tag}
+.cg-syntax-color-attribute  {background-color: @syntax-color-attribute}
+.cg-syntax-color-import {background-color: @syntax-color-import}
+.cg-syntax-color-snippet  {background-color: @syntax-color-snippet}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .colorguide {
 
 // Official Syntax Variables
@@ -12,10 +70,11 @@
   .color( syntax-selection-flash-color );
   .color( syntax-background-color );
 
+  .color( syntax-invisible-character-color );
+
 // Guide colors
   .color( syntax-wrap-guide-color );
   .color( syntax-indent-guide-color );
-  .color( syntax-invisible-character-color );
 
 // For find and replace markers
   .color( syntax-result-marker-color );
@@ -51,22 +110,6 @@
 // custom
 //
  .color( bracket-matcher-border-color );
-
-  // .color( syntax-cursor-line );
-  // .color( syntax-deprecated-fg );
-  // .color( syntax-deprecated-bg );
-  // .color( syntax-illegal-fg );
-  // .color( syntax-illegal-bg );
-  //
-	// .is-color:before {
-  //   content: "";
-  //   display: inline-block;
-  //   height: 60px;
-  //   vertical-align: middle;
-  //   width: 20%;
-	// 	margin-right: 10px;
-	// 	border: @cg-sample-border-width solid @cg-sample-border-color;
-  // }
 
   .color(@variable) {
       .is-color.@{variable}:before {
