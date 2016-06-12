@@ -2,7 +2,6 @@ _ = require 'underscore-plus'
 {Disposable} = require 'atom'
 {ScrollView} = require 'atom-space-pen-views'
 ColorguideUiView = require './cg-ui-view'
-ColorguideSyntaxView = require './cg-syntax-view'
 ColorguideListView = require './cg-list-view'
 
 module.exports =
@@ -12,7 +11,6 @@ class ColorguideView extends ScrollView
       @div class: 'colorguide-panel', =>
         @div class: 'panels', =>
           # @subview 'colorguideUiView', new ColorguideUiView()
-          # @subview 'colorguideSyntaxView', new ColorguideSyntaxView()
           @subview 'colorguideListView', new ColorguideListView()
 
   initialize: ({@uri}) ->

@@ -1,3 +1,4 @@
+$ = jQuery = require 'jquery'
 
 module.exports =
 
@@ -24,7 +25,6 @@ module.exports =
     RGB = rgbString.match(patt)
     {R: RGB[0], G: RGB[1], B: RGB[2]}
 
-
   # format the descrete R G B values into a traditional hex string
   formatHexColor: (RGB) ->
     "#" + @toHexString(RGB.R) + @toHexString(RGB.G) + @toHexString(RGB.B)
@@ -47,3 +47,9 @@ module.exports =
   # add some non-breaking spaces
   addSpaces: (amount) ->
     (String.fromCharCode(160)).repeat(amount)
+
+  showColorValues: (elem) ->
+    bgColor = $(elem + 'x').css('background-color')
+    bgColor = @formatColor(bgColor)
+    elemText = $(elem).text() + '\n' + bgColor
+    $(elem).text(elemText)

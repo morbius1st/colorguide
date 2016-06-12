@@ -1,10 +1,6 @@
 _ = require 'underscore-plus'
 {$, $$, $$$, View} = require 'atom-space-pen-views'
-cgSyntaxVars = require './cg-variables-syntax-required2'
-cgListView = require './cg-list-view'
 colorUtil = require './color-util'
-
-# cgSynVarReqd2 = require './cg-variables-syntax-required2'
 
 _.extend View,
 
@@ -76,12 +72,3 @@ _.extend View,
     @raw """
       <div id = "#{group}" class = 'list-category' >
     """
-
-  showColorValues: (elem) ->
-    window.alert(elem, "element id")
-    bgColor = $(elem + 'x').css('background-color')
-    # window.alert(bgColor, "bg color")
-    colorValueString = colorUtil.formatColor($(elem + 'x').css('background-color'))
-
-    elemText = $(elem).text() + "\n" + colorValueString
-    $(elem).text(elemText)
