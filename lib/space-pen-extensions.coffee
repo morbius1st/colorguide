@@ -1,55 +1,82 @@
 _ = require 'underscore-plus'
 {$, $$, $$$, View} = require 'atom-space-pen-views'
-cgSyntaxVariablesReqd = require './cg-variables-syntax-required'
+cgSyntaxVars = require './cg-variables-syntax-required2'
 cgListView = require './cg-list-view'
-
 colorUtil = require './color-util'
+
+# cgSynVarReqd2 = require './cg-variables-syntax-required2'
 
 _.extend View,
 
-  addListItems: () ->
+  addListItems: (vars, groups, cats) ->
+
     editorBgColor = colorUtil.getEditorBgColorHex()
-
-    cgGroupHeaders = cgSyntaxVariablesReqd.syntaxVarsReqdHeaders()
-    cgSyntaxVarsReqd  = cgSyntaxVariablesReqd.syntaxVarsReqd()
-
-    message = ''
 
     itemIdPrefix = 'reqd'
     itemIdCode = 1
 
-    if cgSyntaxVarsReqd.variables?
-      (cgSyntaxVarsReqd.variables).sort((a, b) -> a.order - b.order)
-      for {order, variablegroup, variablename, variabledesc, bkgcolortop, bkgcolormid, bkgcolorbot} in cgSyntaxVarsReqd.variables
-          cgGroupHeaderText = cgGroupHeaders[variablegroup].description
-          itemId = itemIdPrefix + itemIdCode
-          @addListItemBlock3(itemId, variablename, variabledesc, editorBgColor)
-          itemIdCode++
+    currentGroup = ''
+    currentCategory = ''
+
+    if vars.variables?
+      (vars.variables).sort((a, b) -> a.order - b.order)
+
+      for {order, variableGroup, variableCategory, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot} in vars.variables
+        if currentGroup != variableGroup
+          cgGroupHeaderText = groups[variableGroup].description
+          if currentGroup != ''
+            @raw '''</div>'''
+
+          currentGroup = variableGroup
+          @addGroupHeader(currentGroup, cgGroupHeaderText)
+
+        if currentCategory != variableCategory
+          cgCategoryHeaderText = cats[variableCategory].description
+          if currentCategory != ''
+            @raw '''</ul>'''
+
+          currentCategory = variableCategory
+          @addCategoryHeader(currentCategory, cgCategoryHeaderText)
+
+        itemId = itemIdPrefix + itemIdCode++
+        @addListItemBlock(itemId, variableName, variableDesc, editorBgColor)
 
     else
-      {order, variablegroup, variablename, variabledesc, bkgcolortop, bkgcolormid, bkgcolorbot} = cgSyntaxVarsReqd
-      cgGroupHeaderText = cgGroupHeaders[variablegroup].description
+      {order, variableCategory, variableGroup, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot} = vars
+      cgCategoryHeaderText = cats[variableCategory].description
       itemId = itemIdPrefix + itemIdCode++
-      @addListItemBlock(itemId, variablename, variabledesc)
+
+      @addCategoryHeader(currentCategory, cgCategoryHeaderText)
+      @addListItemBlock(itemId, variableName, variableDesc)
 
     {itemPrefix: itemIdPrefix, itemCount: --itemIdCode}
 
-  addListItemBlock3: (itemId, variablename, variabledesc, editorBgColor) ->
+  addListItemBlock: (itemId, variableName, variableDesc, editorBgColor) ->
+
     @li class: 'list-color', =>
-      @raw """
-        <div class="is-color-preface">
-          <div class="cg-#{variablename} is-color-bar-top"></div>
-          <div class="cg-#{variablename} is-color-bar-mid"></div>
-          <div class="cg-#{variablename} is-color-bar-bot"></div>
-          <div class="cg-#{variablename} is-color-bar-bkg" style = 'border-color: #{editorBgColor}'"></div>
-        </div>
-        <div id="#{itemId}x" class="is-color-block cg-#{variablename}"></div>
-        <div class="list-item">
-          <p class="variable-name">#{variablename}</p>
-          <p>#{variabledesc}</p>
-          <p id="#{itemId}"></p>
-        </div>
-        """
+      @div class: "is-color-preface", =>
+        @div class: "cg-#{variableName} is-color-bar-top"
+        @div class: "cg-#{variableName} is-color-bar-mid"
+        @div class: "cg-#{variableName} is-color-bar-bot"
+        @div class: "cg-#{variableName} is-color-bar-bkg", style: "border-color: #{editorBgColor}"
+      @div id: "#{itemId}x", class: "is-color-block cg-#{variableName}"
+      @div class: "list-item", =>
+        @p class: "variable-name", "#{variableName}"
+        @p "#{variableDesc}"
+        @p id: "#{itemId}", ""
+
+  addCategoryHeader: (category, description) ->
+    @button 'data-name': "#{category}", class: 'btn btn-section-header syntax-cursor-color', click: 'toggle', "#{description}"
+    @raw """
+      <ul id = "#{category}" class = 'list-category' >
+    """
+
+  addGroupHeader: (group, description) ->
+    @button 'data-name': "#{group}", class: 'btn btn-section-header syntax-cursor-color', click: 'toggle', "#{description}"
+    @raw """
+      <div id = "#{group}" class = 'list-category' >
+    """
+
   showColorValues: (elem) ->
     window.alert(elem, "element id")
     bgColor = $(elem + 'x').css('background-color')

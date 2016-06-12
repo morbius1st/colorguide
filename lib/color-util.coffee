@@ -3,10 +3,10 @@ module.exports =
 
   # return the background color of the editor pane
   getEditorBgColorHex: () ->
-    @formatHexColor2(@getRGBfromString2(@getEditorBgColor2()))
+    @formatHexColor(@getRGBfromString(@getEditorBgColor()))
 
   # find the background color of the editor
-  getEditorBgColor2: () ->
+  getEditorBgColor: () ->
     editors = atom.workspace.getTextEditors()
 
     for i in [0 ... editors.length] by 1
@@ -19,17 +19,17 @@ module.exports =
     '#000000'
 
   # extract the R G B values from an RGB string (ie. from rgb(17,17,17))
-  getRGBfromString2: (rgbString) ->
+  getRGBfromString: (rgbString) ->
     patt = /(\d+)/g
     RGB = rgbString.match(patt)
     {R: RGB[0], G: RGB[1], B: RGB[2]}
 
 
   # format the descrete R G B values into a traditional hex string
-  formatHexColor2: (RGB) ->
+  formatHexColor: (RGB) ->
     "#" + @toHexString(RGB.R) + @toHexString(RGB.G) + @toHexString(RGB.B)
 
-  formatRGBcolor2: (RGB) ->
+  formatRGBcolor: (RGB) ->
     RGB.R + ' , ' + RGB.G + ' , ' + RGB.B
 
   # convert a decimal value into a hex string - hex string length always even
@@ -41,9 +41,9 @@ module.exports =
   # create the color value string
   # provide a css RGB string (eg. rgb(17,17,17))
   formatColor: (rgbString) ->
-    RGB = @getRGBfromString2(rgbString)
-    @formatHexColor2(RGB)  + @addSpaces2(5) + @formatRGBcolor2(RGB)
+    RGB = @getRGBfromString(rgbString)
+    @formatHexColor(RGB)  + @addSpaces(5) + @formatRGBcolor(RGB)
 
   # add some non-breaking spaces
-  addSpaces2: (amount) ->
+  addSpaces: (amount) ->
     (String.fromCharCode(160)).repeat(amount)
