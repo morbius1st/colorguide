@@ -1,4 +1,5 @@
 $ = jQuery = require 'jquery'
+math = require 'mathjs'
 
 module.exports =
 
@@ -19,18 +20,29 @@ module.exports =
     # return a default value of black if nothing found
     '#000000'
 
-  # extract the R G B values from an RGB string (ie. from rgb(17,17,17))
+  # extract the R G B values from an RGB string (ie. from rgb(17,17,17)) with possible alpha
   getRGBfromString: (rgbString) ->
     patt = /(\d+)/g
     RGB = rgbString.match(patt)
-    {R: RGB[0], G: RGB[1], B: RGB[2]}
+    if RGB.length > 3
+      patt = /(0\.\d+)/
+      RGB[3] = math.round((rgbString.match(patt))[0] * 255)
+      # window.alert('got alpha: ' + rgbString + " : " + RGB[0] + " : " + RGB[1] + " : " + RGB[2] + " : " + RGB[3])
+
+    {R: RGB[0], G: RGB[1], B: RGB[2], A: RGB[3]}
 
   # format the descrete R G B values into a traditional hex string
   formatHexColor: (RGB) ->
-    "#" + @toHexString(RGB.R) + @toHexString(RGB.G) + @toHexString(RGB.B)
+    if !(RGB.A?)
+      "#" + @toHexString(RGB.R) + @toHexString(RGB.G) + @toHexString(RGB.B)
+    else
+      "#" + @toHexString(RGB.A) + " " + @toHexString(RGB.R) + @toHexString(RGB.G) + @toHexString(RGB.B)
 
   formatRGBcolor: (RGB) ->
-    RGB.R + ' , ' + RGB.G + ' , ' + RGB.B
+    if !(RGB.A?)
+      RGB.R + ' , ' + RGB.G + ' , ' + RGB.B
+    else
+      RGB.R + ' , ' + RGB.G + ' , ' + RGB.B + ', alpha: ' + RGB.A
 
   # convert a decimal value into a hex string - hex string length always even
   toHexString: (decString) ->

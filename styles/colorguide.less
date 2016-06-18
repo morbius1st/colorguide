@@ -77,23 +77,25 @@
     height: 13px;
     border-width: 6px 0 6px 0;
     border-style: solid;
+    padding-left: 4px;
+    align-content: center;
   }
 
   .is-color-bar-top {
-    border-color: white;
+    // border-color: white;
     margin-top: 2px;
     margin-bottom: 4px;
     .is-color-bar;
   }
 
   .is-color-bar-mid {
-    border-color: grey;
+    // border-color: grey;
     margin-bottom: 4px;
     .is-color-bar;
   }
 
   .is-color-bar-bot {
-    border-color: black;
+    // border-color: black;
     margin-bottom: 4px;
     .is-color-bar;
   }
@@ -101,6 +103,32 @@
   .is-color-bar-bkg {
     // border-color: black;
     .is-color-bar;
+  }
+
+  .is-text-bar {
+    line-height: 12px;
+    font-size: 11px;
+    border-width: 0;
+  }
+
+  .is-text-bar-top{
+    .is-color-bar-top;
+    .is-text-bar
+  }
+
+  .is-text-bar-mid{
+    .is-color-bar-mid;
+    .is-text-bar
+  }
+
+  .is-text-bar-bot{
+    .is-color-bar-bot;
+    .is-text-bar
+  }
+
+  .is-text-bar-bkg{
+    .is-color-bar-bkg;
+    .is-text-bar
   }
 
 	.is-color-blank:before {

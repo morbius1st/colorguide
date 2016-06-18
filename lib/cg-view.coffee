@@ -1,25 +1,38 @@
 _ = require 'underscore-plus'
-{Disposable} = require 'atom'
+{Disposable, Directory} = require 'atom'
 {ScrollView} = require 'atom-space-pen-views'
 ColorguideUiView = require './cg-ui-view'
 ColorguideListView = require './cg-list-view'
+fileUtil = require './file-util'
 
 module.exports =
 class ColorguideView extends ScrollView
+
+  pathToThemeSyntaxVariables = null
+  pathToThemeSyntax = null
+
+  pathToThemeUIVariables = null
+
   @content: ->
     @div class: 'colorguide pane-item native-key-bindings', tabindex: -1, =>
       @div class: 'colorguide-panel', =>
         @div class: 'panels', =>
           # @subview 'colorguideUiView', new ColorguideUiView()
-          @subview 'colorguideListView', new ColorguideListView()
+          @subview 'colorguideListView', new ColorguideListView(syntaxPath: pathToThemeSyntax)
+
+  constructor: () ->
+    pathToThemeUI = fileUtil.getRealPath(@getActiveUiTheme())
+    pathToThemeSyntax = fileUtil.getRealPath(@getActiveSyntaxTheme())
+    super
 
   initialize: ({@uri}) ->
-    ThemePathUi = @getActiveUiTheme()
-    # @colorguideUiView.title.text """UI Theme Path: #{ThemePathUi}"""
+    super
 
-    ThemePathSyntax = @getActiveSyntaxTheme()
-    # @colorguideSyntaxView.title.text """Syntax Theme Path: #{ThemePathSyntax}"""
-    @colorguideListView.title.text """Syntax Theme Path: #{ThemePathSyntax}"""
+    # @colorguideUiView.title.text """UI Theme Path: #{pathToThemeUI}"""
+
+    # pathToThemeSyntax = @getActiveSyntaxTheme()
+
+    # @colorguideListView.title.text """Syntax Theme Path: #{pathToThemeSyntax}"""
 
   serialize: ->
     deserializer: @constructor.name
@@ -30,13 +43,13 @@ class ColorguideView extends ScrollView
   getTitle: -> 'Colorguide'
 
     # Get the name of the active ui theme.
-  getActiveUiTheme: ->
+  getActiveUiTheme: () ->
     for {path, metadata} in atom.themes.getActiveThemes()
       return path if metadata.theme is 'ui'
     null
 
   # Get the name of the active syntax theme.
-  getActiveSyntaxTheme: ->
+  getActiveSyntaxTheme: () ->
     for {path, metadata} in atom.themes.getActiveThemes()
       return path if metadata.theme is 'syntax'
     null
