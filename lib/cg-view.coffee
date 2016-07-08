@@ -2,7 +2,7 @@ _ = require 'underscore-plus'
 {Disposable, Directory} = require 'atom'
 {ScrollView} = require 'atom-space-pen-views'
 ColorguideUiView = require './cg-ui-view'
-ColorguideListView = require './cg-list-view'
+ColorguideSyntaxView = require './cg-syntax-view'
 fileUtil = require './file-util'
 
 module.exports =
@@ -12,13 +12,14 @@ class ColorguideView extends ScrollView
   pathToThemeSyntax = null
 
   pathToThemeUIVariables = null
+  pathToThemeUI = null
 
   @content: ->
     @div class: 'colorguide pane-item native-key-bindings', tabindex: -1, =>
       @div class: 'colorguide-panel', =>
         @div class: 'panels', =>
-          # @subview 'colorguideUiView', new ColorguideUiView()
-          @subview 'colorguideListView', new ColorguideListView(syntaxPath: pathToThemeSyntax)
+          @subview 'colorguideUiView', new ColorguideUiView(uiPath: pathToThemeUI)
+          @subview 'colorguideSyntaxView', new ColorguideSyntaxView(syntaxPath: pathToThemeSyntax)
 
   constructor: () ->
     pathToThemeUI = fileUtil.getRealPath(@getActiveUiTheme())
@@ -27,12 +28,6 @@ class ColorguideView extends ScrollView
 
   initialize: ({@uri}) ->
     super
-
-    # @colorguideUiView.title.text """UI Theme Path: #{pathToThemeUI}"""
-
-    # pathToThemeSyntax = @getActiveSyntaxTheme()
-
-    # @colorguideListView.title.text """Syntax Theme Path: #{pathToThemeSyntax}"""
 
   serialize: ->
     deserializer: @constructor.name

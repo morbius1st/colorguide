@@ -1,4 +1,4 @@
-_ = require 'underscore-plus'
++_ = require 'underscore-plus'
 {$, $$, $$$, View} = require 'atom-space-pen-views'
 colorUtil = require './color-util'
 
@@ -40,24 +40,25 @@ _.extend View,
             @raw '''</ul>'''
 
           currentCategory = variableCategory
-          @addCategoryHeader(currentCategory, cgCategoryHeaderText)
+          @addCategoryHeader(currentCategory, cgCategoryHeaderText, currentGroup)
 
         itemId = itemIdPrefix + itemIdCode++
-        @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor)
+        @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, currentGroup)
 
     else
       {order, variableCategory, variableGroup, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot} = vars
       cgCategoryHeaderText = cats[variableCategory].description
       itemId = itemIdPrefix + itemIdCode++
 
-      @addCategoryHeader(currentCategory, cgCategoryHeaderText)
-      @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor)
+      @addCategoryHeader(currentCategory, cgCategoryHeaderText, currentGroup)
+      @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, itemIdPrefix, currentGroup)
 
     {itemPrefix: itemIdPrefix, itemCount: itemIdCode}
 
-  addListItemBlock: (itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor) ->
+  addListItemBlock: (itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, currentGroup) ->
 
-    @li class: 'list-color', =>
+    # @li class: "list-color #{currentGroup}", =>
+    @li class: "list-color", =>
       @div class: "is-color-preface", =>
         @div class: "cg-#{variableName} is-text-bar-top", style: "background-color: #{bkgColorTop}", "Sample"
         @div class: "cg-#{variableName} is-text-bar-mid", style: "background-color: #{bkgColorMid}", "Sample"
@@ -71,17 +72,23 @@ _.extend View,
       @div id: "#{itemId}x", class: "cg-#{variableName} is-color-block"
       @div class: "list-item", =>
         @p class: "variable-name", "#{variableName}"
-        @p "#{variableDesc}"
+        @pre "#{variableDesc}"
         @p id: "#{itemId}", ""
 
-  addCategoryHeader: (category, description) ->
-    @button 'data-name': "#{category}", class: 'btn btn-section-header syntax-cursor-color', click: 'toggle', "#{description}"
+  addGroupHeader: (group, description) ->
+    @div class: 'btn-align', =>
+      @div class: 'div-section-collaspe-btn',  =>
+        # @button 'data-name': "#{group}", class: 'btn btn-header btn-top-margin btn-icon icon icon-diff-removed', click: "toggle2"
+        @button 'data-name': "#{group}", class: 'btn btn-header btn-top-margin btn-icon fa fa-sort', click: "toggle2", ""
+      @div class: 'div-section-header-btn',  =>
+        @button 'data-name': "#{group}", class: 'btn btn-header btn-group-header btn-top-margin', click: 'toggle', "#{description}"
+
     @raw """
-      <ul id = "#{category}" class = 'list-category' >
+      <div id = "#{group}" class = "list-category" >
     """
 
-  addGroupHeader: (group, description) ->
-    @button 'data-name': "#{group}", class: 'btn btn-section-header syntax-cursor-color', click: 'toggle', "#{description}"
+  addCategoryHeader: (category, description, currentGroup) ->
+    @button 'data-name': "#{category}", class: "btn btn-header btn-section-header", click: 'toggle', "#{description}"
     @raw """
-      <div id = "#{group}" class = 'list-category' >
+      <ul id = "#{category}" class = "list-category ul-bot-margin #{currentGroup}" >
     """

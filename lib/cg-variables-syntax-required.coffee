@@ -1,4 +1,18 @@
-cgVarColor = require './cg-variable-color'
+# cgVarColor = require './cg-variable-color'
+
+
+class cgVarColor
+
+  constructor: (idx, group, category, name, desc, top = '#ffffff', mid = '#808080', bot = '#000000') ->
+    @order = idx
+    @variableGroup = group
+    @variableCategory = category
+    @variableName = name
+    @variableDesc = desc
+    @bkgColorTop = top
+    @bkgColorMid = mid
+    @bkgColorBot = bot
+
 
 module.exports =
 

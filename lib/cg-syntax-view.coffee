@@ -5,7 +5,7 @@ colorUtil = require './color-util'
 fileUtil = require './file-util'
 
 module.exports =
-class ColorguideListView extends View
+class ColorguideSyntaxView extends View
 
   itemInfoReqd = null
   itemInfoCustom = null
@@ -24,20 +24,23 @@ class ColorguideListView extends View
         @div class: 'panel-body', =>
           @div class: 'bar', ''
           @button 'data-name': 'officialSynVariables', class: 'btn-division-header', click: 'toggle', 'Official Syntax Variables'
-          @div id: 'officialSynVariables', class: 'atom-panel top padded-right bordered', =>
+          @div id: 'officialSynVariables', class: 'atom-panel top padded-right bordered bordered-panel', =>
             itemInfoReqd = @addListItems(cgSyntaxVars.syntaxVarsReqd(),
                           cgSyntaxVars.syntaxVarsReqdGroups(),
-                          cgSyntaxVars.syntaxVarsReqdCategories(), 'reqd')
+                          cgSyntaxVars.syntaxVarsReqdCategories(), 'reqdsyn')
 
         @div class: 'bar', ''
         @button 'data-name': 'customSyntaxVariables', class: 'btn-division-header', click: 'toggle','Custom Syntax Variables'
         @div id: 'customSyntaxVariables', class: 'atom-panel top padded-right bordered', =>
           itemInfoCustom = @addListItems(syntaxVarsCustom,
                           syntaxVarsCustomGroups,
-                          syntaxVarsCustomCategories, 'cust')
+                          syntaxVarsCustomCategories, 'custsyn')
 
 
   constructor: (params) ->
+    syntaxVarsCustom = null
+    syntaxVarsCustomGroups = null
+    syntaxVarsCustomCategories = null
     fileNameThemeSyntaxVariables = 'cg-variables-syntax-custom.coffee'
     pathToSyntaxTheme = params.syntaxPath
 
@@ -55,6 +58,12 @@ class ColorguideListView extends View
 
   initialize: ->
 
+
+  toggle2: (event, element) ->
+    leClass = '.' + element.attr('data-name')
+
+    $(leClass).toggle();
+
   toggle: (event, element) ->
     leId = '#' + element.attr('data-name')
 
@@ -62,6 +71,7 @@ class ColorguideListView extends View
       $(leId).removeClass('hide')
     else
       $(leId).addClass('hide')
+
 
   attached: ->
     if itemInfoReqd.itemCount > 0
