@@ -1,0 +1,14 @@
+// ui color variable classes
+// xxx-ui
+
+@import "ui-variables";
+
+// parametric mixin
+.cg-color-info(@color) {
+  color: @color;
+  background-color: @color;
+}
+
+// custom variables
+// example
+.cg-tab-bg {.cg-color-info(@tab-bg)}

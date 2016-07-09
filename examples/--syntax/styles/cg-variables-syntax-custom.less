@@ -1,0 +1,27 @@
+// cs-dark-syntax
+
+@import "syntax-variables";
+// @import "tabs";
+
+// parametric mixin
+.cg-color-info(@color) {
+  color: @color;
+  background-color: @color;
+}
+
+// scroll bar
+.cg-scrollbar-color {.cg-color-info(@scrollbar-color)}
+.cg-scrollbar-background-color {.cg-color-info(@scrollbar-background-color)}
+.cg-scrollbar-color-editor {.cg-color-info(@scrollbar-color-editor)}
+.cg-scrollbar-background-color-editor {.cg-color-info(@scrollbar-background-color-editor)}
+.cg-scrollbar-corner-color {.cg-color-info(@scrollbar-corner-color)}
+.cg-scrollbar-corner-color-editor {.cg-color-info(@scrollbar-corner-color-editor)}
+.cg-scrollbar-thumb-color {.cg-color-info(@scrollbar-thumb-color)}
+.cg-scrollbar-thumb-color-editor {.cg-color-info(@scrollbar-thumb-color-editor)}
+// gutter
+.cg-syntax-gutter-text-color-folded {.cg-color-info(@syntax-gutter-text-color-folded)}
+// bracket matching
+.cg-bracket-matcher-border-color {.cg-color-info(@bracket-matcher-border-color)}
+.cg-bracket-matcher-background-color {.cg-color-info(@bracket-matcher-background-color)}
+// editor colors
+.cg-syntax-indent-guide-bkg-color {.cg-color-info(@syntax-indent-guide-bkg-color)}

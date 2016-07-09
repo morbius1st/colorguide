@@ -7,7 +7,7 @@ _.extend View,
   addListItems: (vars, groups, cats, prefix) ->
 
     if !(vars?)
-      @p style: "padding-top: 5px", 'No Custom Syntax Variables Defined'
+      @p style: "padding-top: 5px", 'Nothing Defined'
       return 0
 
     editorBgColor = colorUtil.getEditorBgColorHex()
@@ -43,7 +43,7 @@ _.extend View,
           @addCategoryHeader(currentCategory, cgCategoryHeaderText, currentGroup)
 
         itemId = itemIdPrefix + itemIdCode++
-        @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, currentGroup)
+        @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor)
 
     else
       {order, variableCategory, variableGroup, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot} = vars
@@ -51,34 +51,34 @@ _.extend View,
       itemId = itemIdPrefix + itemIdCode++
 
       @addCategoryHeader(currentCategory, cgCategoryHeaderText, currentGroup)
-      @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, itemIdPrefix, currentGroup)
+      @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, itemIdPrefix)
 
     {itemPrefix: itemIdPrefix, itemCount: itemIdCode}
 
-  addListItemBlock: (itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, currentGroup) ->
+  addListItemBlock: (itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor) ->
 
-    # @li class: "list-color #{currentGroup}", =>
     @li class: "list-color", =>
-      @div class: "is-color-preface", =>
-        @div class: "cg-#{variableName} is-text-bar-top", style: "background-color: #{bkgColorTop}", "Sample"
-        @div class: "cg-#{variableName} is-text-bar-mid", style: "background-color: #{bkgColorMid}", "Sample"
-        @div class: "cg-#{variableName} is-text-bar-bot", style: "background-color: #{bkgColorBot}", "Sample"
-        @div class: "cg-#{variableName} is-text-bar-bkg", style: "background-color: #{editorBgColor}", "Sample"
-      @div class: "is-color-preface", =>
-        @div class: "cg-#{variableName} is-color-bar-top", style: "border-color: #{bkgColorTop}"
-        @div class: "cg-#{variableName} is-color-bar-mid", style: "border-color: #{bkgColorMid}"
-        @div class: "cg-#{variableName} is-color-bar-bot", style: "border-color: #{bkgColorBot}"
-        @div class: "cg-#{variableName} is-color-bar-bkg", style: "border-color: #{editorBgColor}"
-      @div id: "#{itemId}x", class: "cg-#{variableName} is-color-block"
-      @div class: "list-item", =>
-        @p class: "variable-name", "#{variableName}"
-        @pre "#{variableDesc}"
-        @p id: "#{itemId}", ""
+      @div class: 'right', =>
+        @div class: "is-color-preface", =>
+          @div class: "cg-#{variableName} is-text-bar-top", style: "background-color: #{bkgColorTop}", "Sample"
+          @div class: "cg-#{variableName} is-text-bar-mid", style: "background-color: #{bkgColorMid}", "Sample"
+          @div class: "cg-#{variableName} is-text-bar-bot", style: "background-color: #{bkgColorBot}", "Sample"
+          @div class: "cg-#{variableName} is-text-bar-bkg", style: "background-color: #{editorBgColor}", "Sample"
+        @div class: "is-color-preface", =>
+          @div class: "cg-#{variableName} is-color-bar-top", style: "border-color: #{bkgColorTop}"
+          @div class: "cg-#{variableName} is-color-bar-mid", style: "border-color: #{bkgColorMid}"
+          @div class: "cg-#{variableName} is-color-bar-bot", style: "border-color: #{bkgColorBot}"
+          @div class: "cg-#{variableName} is-color-bar-bkg", style: "border-color: #{editorBgColor}"
+        @div id: "#{itemId}x", class: "cg-#{variableName} is-color-block"
+      @div class: 'left', =>
+        @div class: 'list-item', =>
+          @p class: "variable-name", "#{variableName}"
+          @pre "#{variableDesc}"
+          @pre id: "#{itemId}", ""
 
   addGroupHeader: (group, description) ->
     @div class: 'btn-align', =>
       @div class: 'div-section-collaspe-btn',  =>
-        # @button 'data-name': "#{group}", class: 'btn btn-header btn-top-margin btn-icon icon icon-diff-removed', click: "toggle2"
         @button 'data-name': "#{group}", class: 'btn btn-header btn-top-margin btn-icon fa fa-sort', click: "toggle2", ""
       @div class: 'div-section-header-btn',  =>
         @button 'data-name': "#{group}", class: 'btn btn-header btn-group-header btn-top-margin', click: 'toggle', "#{description}"
@@ -87,8 +87,9 @@ _.extend View,
       <div id = "#{group}" class = "list-category" >
     """
 
-  addCategoryHeader: (category, description, currentGroup) ->
-    @button 'data-name': "#{category}", class: "btn btn-header btn-section-header", click: 'toggle', "#{description}"
+  addCategoryHeader: (category, description, group) ->
+    @button 'data-name': "#{category}", class: "btn btn-header btn-section-header", click: 'toggle2', "#{description}"
     @raw """
-      <ul id = "#{category}" class = "list-category ul-bot-margin #{currentGroup}" >
+      <div class = "div-spacer #{category} #{group} hide"></div>
+      <ul class = "list-category ul-bot-margin #{group} #{category} hide" >
     """

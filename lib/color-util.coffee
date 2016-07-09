@@ -54,7 +54,8 @@ module.exports =
   # provide a css RGB string (eg. rgb(17,17,17))
   formatColor: (rgbString) ->
     RGB = @getRGBfromString(rgbString)
-    @formatHexColor(RGB)  + @addSpaces(5) + @formatRGBcolor(RGB)
+    # @formatHexColor(RGB)  + @addSpaces(5) + @formatRGBcolor(RGB)
+    @formatHexColor(RGB)  + '\n' + @formatRGBcolor(RGB)
 
   # add some non-breaking spaces
   addSpaces: (amount) ->
@@ -63,5 +64,5 @@ module.exports =
   showColorValues: (elem) ->
     bgColor = $(elem + 'x').css('background-color')
     bgColor = @formatColor(bgColor)
-    elemText = $(elem).text() + '\n' + bgColor
+    elemText = $(elem).text() + bgColor
     $(elem).text(elemText)

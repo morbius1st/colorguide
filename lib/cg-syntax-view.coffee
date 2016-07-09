@@ -20,11 +20,11 @@ class ColorguideSyntaxView extends View
     @div class: 'tool-panel padded package-panel', =>
       @div class: 'inset-panel', =>
         @h2 'Syntax Theme Colors'
-        @h3 'Syntax Theme Path: ' + pathToSyntaxTheme
+        @h4 'Path: ' + pathToSyntaxTheme
         @div class: 'panel-body', =>
           @div class: 'bar', ''
           @button 'data-name': 'officialSynVariables', class: 'btn-division-header', click: 'toggle', 'Official Syntax Variables'
-          @div id: 'officialSynVariables', class: 'atom-panel top padded-right bordered bordered-panel', =>
+          @div id: 'officialSynVariables', class: 'atom-panel top padded-right bordered', =>
             itemInfoReqd = @addListItems(cgSyntaxVars.syntaxVarsReqd(),
                           cgSyntaxVars.syntaxVarsReqdGroups(),
                           cgSyntaxVars.syntaxVarsReqdCategories(), 'reqdsyn')
@@ -35,7 +35,6 @@ class ColorguideSyntaxView extends View
           itemInfoCustom = @addListItems(syntaxVarsCustom,
                           syntaxVarsCustomGroups,
                           syntaxVarsCustomCategories, 'custsyn')
-
 
   constructor: (params) ->
     syntaxVarsCustom = null
@@ -53,7 +52,6 @@ class ColorguideSyntaxView extends View
       syntaxVarsCustomGroups = cgSyntaxVarsCustom.syntaxVarsCustomGroups()
       syntaxVarsCustomCategories = cgSyntaxVarsCustom.syntaxVarsCustomCategories()
 
-
     super
 
   initialize: ->
@@ -62,7 +60,10 @@ class ColorguideSyntaxView extends View
   toggle2: (event, element) ->
     leClass = '.' + element.attr('data-name')
 
-    $(leClass).toggle();
+    if ($(leClass).hasClass('hide'))
+      $(leClass).removeClass('hide')
+    else
+      $(leClass).addClass('hide')
 
   toggle: (event, element) ->
     leId = '#' + element.attr('data-name')

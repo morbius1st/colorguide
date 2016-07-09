@@ -3,6 +3,7 @@ _ = require 'underscore-plus'
 {ScrollView} = require 'atom-space-pen-views'
 ColorguideUiView = require './cg-ui-view'
 ColorguideSyntaxView = require './cg-syntax-view'
+ColorguideSynColorView = require './cg-syntax-color-view'
 fileUtil = require './file-util'
 
 module.exports =
@@ -20,6 +21,7 @@ class ColorguideView extends ScrollView
         @div class: 'panels', =>
           @subview 'colorguideUiView', new ColorguideUiView(uiPath: pathToThemeUI)
           @subview 'colorguideSyntaxView', new ColorguideSyntaxView(syntaxPath: pathToThemeSyntax)
+          @subview 'colorguideSynColorView', new ColorguideSynColorView(syntaxPath: pathToThemeSyntax)
 
   constructor: () ->
     pathToThemeUI = fileUtil.getRealPath(@getActiveUiTheme())

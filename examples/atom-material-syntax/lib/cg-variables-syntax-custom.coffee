@@ -1,26 +1,20 @@
-class cgVarColor
+# colorguide
+# syntax custom color variables
+# atom-material-syntax
 
-  constructor: (idx, group, category, name, desc, top = '#ffffff', mid = '#808080', bot = '#000000') ->
-    @order = idx
-    @variableGroup = group
-    @variableCategory = category
-    @variableName = name
-    @variableDesc = desc
-    @bkgColorTop = top
-    @bkgColorMid = mid
-    @bkgColorBot = bot
+cgVarColor = require './cg-variable-color'
 
 module.exports =
 
   syntaxVarsCustomGroups: () ->
     {
-      GRPc0: {key: 'GRPc0', value:    0, description: 'Custom Colors'}
+      GRPsc0: {key: 'GRPsc0', value:    0, description: 'Custom Colors'}
     }
 
   syntaxVarsCustomCategories: () ->
     {
-      CATc0: {key: 'CATc0', value: 0, description: 'Cursor Line'}
-      CATc1: {key: 'CATc1', value: 1, description: 'Bracket Matcher'}
+      CATsc0: {key: 'CATsc0', value: 0, description: 'Cursor Line'}
+      CATsc1: {key: 'CATsc1', value: 1, description: 'Bracket Matcher'}
     }
 
   syntaxVarsCustom: () ->
@@ -30,7 +24,7 @@ module.exports =
     {variables:
       [
         # custom colors
-        new cgVarColor(0.010, g.GRPc0.key, c.CATc0.key, 'syntax-cursor-line', 'Cursor Line')
-        new cgVarColor(0.010, g.GRPc0.key, c.CATc1.key, 'syntax-bracket-matcher-background-color', 'Bracket matcher background')
+        new cgVarColor(0.010, g.GRPsc0.key, c.CATsc0.key, 'syntax-cursor-line', 'Cursor Line')
+        new cgVarColor(0.010, g.GRPsc0.key, c.CATsc1.key, 'syntax-bracket-matcher-background-color', 'Bracket matcher background')
       ]
     }

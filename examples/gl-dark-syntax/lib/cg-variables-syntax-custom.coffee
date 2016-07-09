@@ -1,27 +1,21 @@
-class cgVarColor
+# colorguide
+# syntax custom color variables
+# gl-dark-syntax
 
-  constructor: (idx, group, category, name, desc, top = '#ffffff', mid = '#808080', bot = '#000000') ->
-    @order = idx
-    @variableGroup = group
-    @variableCategory = category
-    @variableName = name
-    @variableDesc = desc
-    @bkgColorTop = top
-    @bkgColorMid = mid
-    @bkgColorBot = bot
+cgVarColor = require './cg-variable-color'
 
 module.exports =
 
   syntaxVarsCustomGroups: () ->
     {
-      GRPc0: {key: 'GRPc0', value:    0, description: 'Custom Colors'}
+      GRPsc0: {key: 'GRPsc0', value:    0, description: 'Custom Colors'}
     }
 
   syntaxVarsCustomCategories: () ->
     {
-      CATc0: {key: 'CATc0', value: 0, description: 'Cursor Line'}
-      CATc1: {key: 'CATc1', value: 1, description: 'Deprecated'}
-      CATc2: {key: 'CATc2', value: 2, description: 'Illegal'}
+      CATsc0: {key: 'CATsc0', value: 0, description: 'Cursor Line'}
+      CATsc1: {key: 'CATsc1', value: 1, description: 'Deprecated'}
+      CATsc2: {key: 'CATsc2', value: 2, description: 'Illegal'}
     }
 
   syntaxVarsCustom: () ->
@@ -31,10 +25,10 @@ module.exports =
     {variables:
       [
         # custom colors
-        new cgVarColor(0.010, g.GRPc0.key, c.CATc0.key, 'syntax-cursor-line', 'Cursor Line')
-        new cgVarColor(0.010, g.GRPc0.key, c.CATc1.key, 'syntax-deprecated-fg', 'Deprecated Foreground')
-        new cgVarColor(0.020, g.GRPc0.key, c.CATc1.key, 'syntax-deprecated-bg', 'Deprecated Background')
-        new cgVarColor(0.010, g.GRPc0.key, c.CATc2.key, 'syntax-illegal-fg', 'Illegal Foreground')
-        new cgVarColor(0.020, g.GRPc0.key, c.CATc2.key, 'syntax-illegal-bg', 'Illegal Background')
+        new cgVarColor(0.010, g.GRPsc0.key, c.CATsc0.key, 'syntax-cursor-line', 'Cursor Line')
+        new cgVarColor(0.010, g.GRPsc0.key, c.CATsc1.key, 'syntax-deprecated-fg', 'Deprecated Foreground')
+        new cgVarColor(0.020, g.GRPsc0.key, c.CATsc1.key, 'syntax-deprecated-bg', 'Deprecated Background')
+        new cgVarColor(0.010, g.GRPsc0.key, c.CATsc2.key, 'syntax-illegal-fg', 'Illegal Foreground')
+        new cgVarColor(0.020, g.GRPsc0.key, c.CATsc2.key, 'syntax-illegal-bg', 'Illegal Background')
       ]
     }

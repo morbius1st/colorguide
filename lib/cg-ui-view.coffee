@@ -20,7 +20,7 @@ class ColorguideUiView extends View
     @div class: 'tool-panel padded package-panel', =>
       @div class: 'inset-panel', =>
         @h2 'Ui Theme Colors'
-        @h3 'Ui Theme Path: ' + pathToUiTheme
+        @h4 'Path: ' + pathToUiTheme
         @div class: 'panel-body', =>
           @div class: 'bar', ''
           @button 'data-name': 'officialUiVariables', class: 'btn-division-header', click: 'toggle', 'Official Ui Variables'
@@ -52,7 +52,6 @@ class ColorguideUiView extends View
       uiVarsCustom = cgUiVarsCustom.uiVarsCustom()
       uiVarsCustomGroups = cgUiVarsCustom.uiVarsCustomGroups()
       uiVarsCustomCategories = cgUiVarsCustom.uiVarsCustomCategories()
-
 
     super
 
