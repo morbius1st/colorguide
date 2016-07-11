@@ -238,7 +238,7 @@ module.exports =
         new cgVarColor(1.140, g.GRPscx0.key, c.CATscx4.key, 'lime_a400','')
         new cgVarColor(1.170, g.GRPscx0.key, c.CATscx4.key, 'lime_a700','')
         # yellow colors
-        new cgVarColor(0.05, g.GRPscx0.key, c.CATscx3.key, 'yellow_50','')
+        new cgVarColor(0.005, g.GRPscx0.key, c.CATscx3.key, 'yellow_50','')
         new cgVarColor(0.010, g.GRPscx0.key, c.CATscx3.key, 'yellow_100','')
         new cgVarColor(0.020, g.GRPscx0.key, c.CATscx3.key, 'yellow_200','')
         new cgVarColor(0.030, g.GRPscx0.key, c.CATscx3.key, 'yellow_300','')

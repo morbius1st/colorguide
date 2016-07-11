@@ -1,6 +1,7 @@
 @import "ui-variables";
 @import "syntax-variables";
-@import "cg-variables";
+@import "cg-color-variables";
+@import '../../tool-bar/iconsets/font-awesome/font-awesome';
 
 .colorguide {
 	overflow: auto;
@@ -227,6 +228,16 @@
     float: right;
     margin-right: 5px;
     display: inline;
+  }
+
+  .btn-at-right {
+  }
+
+  .btn-group-header::after,
+    .btn-section-header::after {
+    float: right;
+    font-family: FontAwesome;
+    content: @fa-var-sort;
   }
 
   .btn-align {

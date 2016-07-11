@@ -1,32 +1,32 @@
 # colorguide
-# ui custom color variables
 # xxx-ui
+# ui custom color variables
 
 cgVarColor = require './cg-variable-color'
 
 module.exports =
 
-  syntaxVarsCustomGroups: () ->
+  groups: () ->
     {
       GRPuc0: {key: 'GRPuc0', value:    0, description: 'group name 0'}
       GRPuc1: {key: 'GRPuc1', value:    0, description: 'group name 1'}
     }
 
-  syntaxVarsCustomCategories: () ->
+  categories: () ->
     {
-      CATuc0: {key: 'CATuc0', value: 0, description: 'category name 0'}
-      CATuc1: {key: 'CATuc1', value: 1, description: 'category name 1'}
-      CATuc2: {key: 'CATuc2', value: 2, description: 'category name 2'}
+      CATuc0: {key: 'CATuc0', value: 0, description: 'Colors'}
+      CATuc1: {key: 'CATuc1', value: 1, description: 'Colors'}
+      CATuc2: {key: 'CATuc2', value: 2, description: 'Colors'}
     }
 
-  syntaxVarsCustom: () ->
-    g = @syntaxVarsCustomGroups()
-    c = @syntaxVarsCustomCategories()
+  variables: () ->
+    g = @groups()
+    c = @categories()
 
     {variables:
       [
         # custom colors
         # example:  new cgVarColor(0.010, g.GRPuc0.key, c.CATuc0.key, 'tab-bg', 'Tab background color')
-        new cgVarColor(0.010, g.GRPuc0.key, c.CATuc0.key, '--- class name of ui variable without dot ---', 'optional brief description')
+        new cgVarColor(0.010, g.GRPuc0.key, c.CATuc0.key, '--- class name of variable without the .cg- ---', 'optional brief description')
       ]
     }

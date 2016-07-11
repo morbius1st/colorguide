@@ -1,4 +1,4 @@
-ColorguideView = null
+ColorguideViews = null
 cgView = null
 ColorguideViewURI = 'atom://colorguide'
 $ = jQuery = require 'jquery'
@@ -12,8 +12,8 @@ module.exports =
           atom.workspace.open(ColorguideViewURI)
 
   createColorguideView: (state) ->
-      ColorguideView ?= require './cg-view'
-      new ColorguideView(state)
+      ColorguideViews ?= require './cg-views'
+      new ColorguideViews(state)
 
   consumeThemeVars: (options={}) ->
     cgVar = options.name

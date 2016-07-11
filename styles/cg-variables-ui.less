@@ -1,12 +1,11 @@
-@import "ui-variables";
+// colorguide
+// required ui variables
 
-// parametric mixin
-.cg-color-info(@color) {
-  color: @color;
-  background-color: @color;
-}
+@import "ui-variables";
+@import "cg-color-info";
 
 // editor and text colors
+// Text Colors
 .cg-text-color {.cg-color-info(@text-color)}
 .cg-text-color-subtle {.cg-color-info(@text-color-subtle)}
 .cg-text-color-highlight {.cg-color-info(@text-color-highlight)}
@@ -15,6 +14,7 @@
 .cg-text-color-success {.cg-color-info(@text-color-success)}
 .cg-text-color-warning {.cg-color-info(@text-color-warning)}
 .cg-text-color-error {.cg-color-info(@text-color-error)}
+// Background Colors
 .cg-background-color-info {.cg-color-info(@background-color-info)}
 .cg-background-color-success {.cg-color-info(@background-color-success)}
 .cg-background-color-warning {.cg-color-info(@background-color-warning)}
@@ -22,31 +22,42 @@
 .cg-background-color-highlight {.cg-color-info(@background-color-highlight)}
 .cg-background-color-selected {.cg-color-info(@background-color-selected)}
 .cg-app-background-color {.cg-color-info(@app-background-color)}
+// Base Colors
 .cg-base-background-color {.cg-color-info(@base-background-color)}
 .cg-base-border-color {.cg-color-info(@base-border-color)}
+// Pane Item Colors
 .cg-pane-item-background-color {.cg-color-info(@pane-item-background-color)}
 .cg-pane-item-border-color {.cg-color-info(@pane-item-border-color)}
+// Input Colors
 .cg-input-background-color {.cg-color-info(@input-background-color)}
 .cg-input-border-color {.cg-color-info(@input-border-color)}
+// Tool Panel Colors
 .cg-tool-panel-background-color {.cg-color-info(@tool-panel-background-color)}
 .cg-tool-panel-border-color {.cg-color-info(@tool-panel-border-color)}
+// Inset Panel Colors
 .cg-inset-panel-background-color {.cg-color-info(@inset-panel-background-color)}
 .cg-inset-panel-border-color {.cg-color-info(@inset-panel-border-color)}
+// Panel Heading Colors
 .cg-panel-heading-background-color {.cg-color-info(@panel-heading-background-color)}
 .cg-panel-heading-border-color {.cg-color-info(@panel-heading-border-color)}
+// Overlay Colors
 .cg-overlay-background-color {.cg-color-info(@overlay-background-color)}
 .cg-overlay-border-color {.cg-color-info(@overlay-border-color)}
+// Button Colors
 .cg-button-background-color {.cg-color-info(@button-background-color)}
 .cg-button-background-color-hover {.cg-color-info(@button-background-color-hover)}
 .cg-button-background-color-selected {.cg-color-info(@button-background-color-selected)}
 .cg-button-border-color {.cg-color-info(@button-border-color)}
+// Tab Bar Colors
 .cg-tab-bar-background-color {.cg-color-info(@tab-bar-background-color)}
 .cg-tab-bar-border-color {.cg-color-info(@tab-bar-border-color)}
 .cg-tab-background-color {.cg-color-info(@tab-background-color)}
 .cg-tab-background-color-active {.cg-color-info(@tab-background-color-active)}
 .cg-tab-border-color {.cg-color-info(@tab-border-color)}
+// Tree View Colors
 .cg-tree-view-background-color {.cg-color-info(@tree-view-background-color)}
 .cg-tree-view-border-color {.cg-color-info(@tree-view-border-color)}
+// Ui Site Colors
 .cg-ui-site-color-1 {.cg-color-info(@ui-site-color-1)}
 .cg-ui-site-color-2 {.cg-color-info(@ui-site-color-2)}
 .cg-ui-site-color-3 {.cg-color-info(@ui-site-color-3)}

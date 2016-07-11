@@ -3,13 +3,13 @@ cgVarColor = require './cg-variable-color'
 
 module.exports =
 
-  uiVarsReqdGroups: () ->
+  groups: () ->
     {
       GRPur1: {key: 'GRPur1', value:    0, description: 'General Colors'}
       GRPur2: {key: 'GRPur2', value: 1000, description: 'Component Colors'}
     }
 
-  uiVarsReqdCategories: () ->
+  categories: () ->
     count = 1
     {
       CATur1:  {key: 'CATur1',  value: count++, description: 'Text Colors'}
@@ -28,9 +28,9 @@ module.exports =
 
     }
 
-  uiVarsReqd: () ->
-    g = @uiVarsReqdGroups()
-    c = @uiVarsReqdCategories()
+  variables: () ->
+    g = @groups()
+    c = @categories()
 
     {variables:
       [

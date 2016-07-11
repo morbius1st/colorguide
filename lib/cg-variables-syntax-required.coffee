@@ -3,13 +3,13 @@ cgVarColor = require './cg-variable-color'
 
 module.exports =
 
-  syntaxVarsReqdGroups: () ->
+  groups: () ->
     {
       GRPsr0: {key: 'GRPsr0', value:    0, description: 'General Colors'}
       GRPsr1: {key: 'GRPsr1', value: 1000, description: 'Language Entity Colors'}
     }
 
-  syntaxVarsReqdCategories: () ->
+  categories: () ->
     count = 1
     {
       CATsr0:  {key: 'CATsr0',  value: count++, description: 'Text and Screen Colors'}
@@ -21,9 +21,9 @@ module.exports =
       CATsr12: {key: 'CATsr12', value: count++, description: 'User Defined Symbols'}
     }
 
-  syntaxVarsReqd: () ->
-    g = @syntaxVarsReqdGroups()
-    c = @syntaxVarsReqdCategories()
+  variables: () ->
+    g = @groups()
+    c = @categories()
 
     {variables:
       [
