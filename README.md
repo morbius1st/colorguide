@@ -47,16 +47,20 @@ The background color of the four color bars are set by default to:
 
 The first three background colors can be changed separately for each variable.  In the `.coffee` files, modify a `new cgVarColor()` object to include additional parameter(s):
 
-`new cgVarColor(idx, group, category, name, desc, 'top color', 'mid-top color', 'mid-bottom color')`
+```javascript
+new cgVarColor(idx, group, category, name, desc, 'top color', 'mid-top color', 'mid-bottom color')
+```
 
 For example, to change the background color of the top color bar for `text-color-success`, modify the line in the file
 'colorguide/lib/cg-variables-ui-required.coffee' line this:
 
-`new cgVarColor(0.060, g.GRPur1.key, c.CATur1.key, 'text-color-success', 'General Text Color - Success (Green)', '#000080')`
+```javascript
+new cgVarColor(0.060, g.GRPur1.key, c.CATur1.key, 'text-color-success', 'General Text Color - Success (Green)', '#000080')
+```
 
-This will produce this result:
+Which produces:
 
-
+![Sceenshot](https://cloud.githubusercontent.com/assets/17919240/17277240/c1a633c4-56f2-11e6-92e5-169c3d8eca44.png?raw=true)
 
 
 
