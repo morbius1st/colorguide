@@ -4,7 +4,6 @@ fs = require 'fs-plus'
 Path = require 'path'
 
 
-
 module.exports =
 
   getRealPath: (testPath) ->
@@ -23,7 +22,7 @@ module.exports =
 
   findVariables: (rootFolder, variableFileName) ->
     if rootFolder != __dirname
-      variableFileName = 'lib/' + variableFileName
+      variableFileName = 'lib/colorguide/' + variableFileName
 
     rootFolderReal = @getRealPath(rootFolder)
 

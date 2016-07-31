@@ -15,12 +15,16 @@ class ColorguideViews extends ScrollView
   # ui information
   uiTitle = null
   uiSubTitle = null
+  uiDescription = null
+  uiVersion = null
   uiPartA = null;
   uiPartB = null;
 
   # syntax information
   syntaxTitle = null
   syntaxSubTitle = null
+  syntaxDescription = null
+  SyntaxVersion = null
   syntaxPartA = null;
   syntaxPartB = null;
 
@@ -34,29 +38,36 @@ class ColorguideViews extends ScrollView
     @div class: 'colorguide pane-item native-key-bindings', tabindex: -1, =>
       @div class: 'colorguide-panel', =>
         @div class: 'panels', =>
-          @subview 'colorguideView1', new ColorguideView(title: uiTitle, subTitle: uiSubTitle, partA: uiPartA, partB: uiPartB);
-          @subview 'colorguideView2', new ColorguideView(title: syntaxTitle, subTitle: syntaxSubTitle, partA: syntaxPartA, partB: syntaxPartB);
-          @subview 'colorguideView3', new ColorguideView(title: colorTitle, subTitle: colorSubTitle, partA: colorPartA, partB: colorPartB);
+          @subview 'colorguideView', new ColorguideView(title: uiTitle, subTitle: uiSubTitle, description: uiDescription, partA: uiPartA, partB: uiPartB);
+          @subview 'colorguideView', new ColorguideView(title: syntaxTitle, subTitle: syntaxSubTitle,description: syntaxDescription, partA: syntaxPartA, partB: syntaxPartB);
+          @subview 'colorguideView', new ColorguideView(title: colorTitle, subTitle: colorSubTitle, description: colorSubTitle, partA: colorPartA, partB: colorPartB);
 
   constructor: () ->
 
-    uiPathToTheme = fileUtil.getRealPath(@getActiveUiTheme())
-    syntaxPathToTheme = fileUtil.getRealPath(@getActiveSyntaxTheme())
+    uiMetaInfo = @getActiveUiTheme()
+    syntaxMetaInfo = @getActiveSyntaxTheme()
+
+    uiPathToTheme = fileUtil.getRealPath(uiMetaInfo.path)
+    syntaxPathToTheme = fileUtil.getRealPath(syntaxMetaInfo.path)
 
     uiTitle = 'Ui Theme Variables'
     uiSubTitle = 'Path: ' + uiPathToTheme
-    uiPartA = new cgViewInfo('Official Ui Variables', 'uiReqd', __dirname, 'cg-variables-ui-required.coffee');
-    uiPartB = new cgViewInfo('Custom Ui Variables', 'uiCust', uiPathToTheme, 'cg-variables-ui-custom.coffee');
+    uiDescription = uiMetaInfo.description
+    uiVersion = uiMetaInfo.version
+    uiPartA = new cgViewInfo('Official Ui Variables', 'uiReqd', __dirname, 'cg-variables-ui-required.coffee', '1.0.0');
+    uiPartB = new cgViewInfo('Custom Ui Variables', 'uiCust', uiPathToTheme, 'cg-variables-ui-custom.coffee', uiVersion);
 
     syntaxTitle = 'Syntax Theme Variables'
     syntaxSubTitle = 'Path: ' + syntaxPathToTheme
-    syntaxPartA = new cgViewInfo('Official Syntax Variables', 'syntaxReqd', __dirname, 'cg-variables-syntax-required.coffee');
-    syntaxPartB = new cgViewInfo('Custom Syntax Variables', 'syntaxCust', syntaxPathToTheme, 'cg-variables-syntax-custom.coffee');
+    syntaxDescription = syntaxMetaInfo.description
+    syntaxVersion = syntaxMetaInfo.version
+    syntaxPartA = new cgViewInfo('Official Syntax Variables', 'syntaxReqd', __dirname, 'cg-variables-syntax-required.coffee', '1.0.0');
+    syntaxPartB = new cgViewInfo('Custom Syntax Variables', 'syntaxCust', syntaxPathToTheme, 'cg-variables-syntax-custom.coffee', syntaxVersion);
 
     colorTitle = 'Theme Defined Colors'
     colorSubTitle = '\u00A0'
-    colorPartA = new cgViewInfo('Ui Theme Defined Colors', 'uiColor', uiPathToTheme, 'cg-variables-ui-colors.coffee')
-    colorPartB = new cgViewInfo('Syntax Theme Defined Colors', 'syntaxColor', syntaxPathToTheme, 'cg-variables-syntax-colors.coffee')
+    colorPartA = new cgViewInfo('Ui Theme Defined Colors', 'uiColor', uiPathToTheme, 'cg-variables-ui-colors.coffee', uiVersion)
+    colorPartB = new cgViewInfo('Syntax Theme Defined Colors', 'syntaxColor', syntaxPathToTheme, 'cg-variables-syntax-colors.coffee', syntaxVersion)
 
     super
 
@@ -74,17 +85,20 @@ class ColorguideViews extends ScrollView
     # Get the name of the active ui theme.
   getActiveUiTheme: () ->
     for {path, metadata} in atom.themes.getActiveThemes()
-      return path if metadata.theme is 'ui'
+      # window.alert('meta: ' + '\n' + Object.getOwnPropertyNames(metadata))
+      return {path: path, version: metadata.version, description: metadata.description} if metadata.theme is 'ui'
     null
 
   # Get the name of the active syntax theme.
   getActiveSyntaxTheme: () ->
     for {path, metadata} in atom.themes.getActiveThemes()
-      return path if metadata.theme is 'syntax'
+      return {path: path, version: metadata.version, description: metadata.description} if metadata.theme is 'syntax'
     null
 
   attached: ->
-    for info in @colorguideView1.getItemInfo()
+    for info in @colorguideView.getItemInfo()
       if info.itemCount > 0
         for i in [ 1 ... info.itemCount] by 1
           colorUtil.showColorValues('#' + info.itemPrefix + i)
+
+    @colorguideView.resetItemInfo()

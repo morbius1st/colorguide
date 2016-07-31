@@ -24,10 +24,15 @@ module.exports =
   getRGBfromString: (rgbString) ->
     patt = /(\d+)/g
     RGB = rgbString.match(patt)
+
     if RGB.length > 3
       patt = /(0\.\d+)/
-      RGB[3] = math.round((rgbString.match(patt))[0] * 255)
-      # window.alert('got alpha: ' + rgbString + " : " + RGB[0] + " : " + RGB[1] + " : " + RGB[2] + " : " + RGB[3])
+      rgbString = rgbString.match(patt)
+      if rgbString?
+        RGB[3] = math.round(rgbString[0] * 255)
+        # window.alert('got alpha: ' + rgbString + " : " + RGB[0] + " : " + RGB[1] + " : " + RGB[2] + " : " + RGB[3])
+      else
+        RGB[3] = 0
 
     {R: RGB[0], G: RGB[1], B: RGB[2], A: RGB[3]}
 
@@ -53,8 +58,9 @@ module.exports =
   # create the color value string
   # provide a css RGB string (eg. rgb(17,17,17))
   formatColor: (rgbString) ->
+
     RGB = @getRGBfromString(rgbString)
-    # @formatHexColor(RGB)  + @addSpaces(5) + @formatRGBcolor(RGB)
+
     @formatHexColor(RGB)  + '\n' + @formatRGBcolor(RGB)
 
   # add some non-breaking spaces

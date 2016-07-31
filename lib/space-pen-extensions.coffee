@@ -4,11 +4,15 @@ colorUtil = require './color-util'
 
 _.extend View,
 
-  addListItems: (vars, groups, cats, prefix) ->
+  addListItems: (varInfo, prefix) ->
 
-    if !(vars?)
-      @p style: "padding-top: 5px", 'Nothing Defined'
+    if !(varInfo?)
+      @p class: "p-nothing-defined", 'Nothing Defined'
       return 0
+
+    vars = varInfo.variables()
+    groups = varInfo.groups()
+    cats = varInfo.categories()
 
     editorBgColor = colorUtil.getEditorBgColorHex()
 
@@ -40,7 +44,7 @@ _.extend View,
             @raw '''</ul>'''
 
           currentCategory = variableCategory
-          @addCategoryHeader(currentCategory, cgCategoryHeaderText, currentGroup)
+          @addCategoryHeader(currentGroup, currentCategory, cgCategoryHeaderText)
 
         itemId = itemIdPrefix + itemIdCode++
         @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor)
@@ -50,7 +54,7 @@ _.extend View,
       cgCategoryHeaderText = cats[variableCategory].description
       itemId = itemIdPrefix + itemIdCode++
 
-      @addCategoryHeader(currentCategory, cgCategoryHeaderText, currentGroup)
+      @addCategoryHeader(currentGroup, currentCategory, cgCategoryHeaderText)
       @addListItemBlock(itemId, variableName, variableDesc, bkgColorTop, bkgColorMid, bkgColorBot, editorBgColor, itemIdPrefix)
 
     {itemPrefix: itemIdPrefix, itemCount: itemIdCode}
@@ -76,20 +80,32 @@ _.extend View,
           @pre "#{variableDesc}"
           @pre id: "#{itemId}", ""
 
+
   addGroupHeader: (group, description) ->
     @div class: 'btn-align', =>
       @div class: 'div-section-collaspe-btn',  =>
-        @button 'data-name': "#{group}", class: 'btn btn-header btn-top-margin btn-icon fa fa-sort', click: "toggle2", ""
+        @button 'data-name': "#{group}", class: 'btn-anmie btn-header btn-top-margin btn-icon fa fa-sort', click: "toggle2", ""
       @div class: 'div-section-header-btn',  =>
-        @button 'data-name': "#{group}", class: 'btn btn-header btn-group-header btn-top-margin', click: 'toggle', "#{description}"
+        @button 'data-name': "#{group}", class: 'btn-anmie btn-header btn-group-header btn-top-margin', click: 'toggle', "#{description}"
 
     @raw """
       <div id = "#{group}" class = "list-category" >
     """
 
-  addCategoryHeader: (category, description, group) ->
-    @button 'data-name': "#{category}", class: "btn btn-header btn-section-header", click: 'toggle2', "#{description}"
+  addCategoryHeader: (group, category, description) ->
+    @button 'data-name': "#{group}-#{category}", class: "btn-anmie btn-header btn-section-header", click: 'toggle2', "#{description}"
     @raw """
-      <div class = "div-spacer #{category} #{group} hide"></div>
-      <ul class = "list-category ul-bot-margin #{group} #{category} hide" >
+      <div class = "div-spacer #{group}\-#{category} #{group} hide"></div>
+      <ul class = "list-category ul-bot-margin #{group} #{group}\-#{category} hide" >
     """
+
+  addPanel: (title, dataName, vars, prefix, version) ->
+    @div class: 'panel-body', =>
+      @div class: 'bar', ''
+      @button 'data-name': dataName, class: 'btn-division-header', click: 'toggle', title
+      @div =>
+        @span class: 'span-at-right',  'version: ' + version
+      @div id: dataName, class: 'atom-panel top padded-right bordered', =>
+        @itemInfo = @addListItems(vars, prefix)
+
+    return @itemInfo

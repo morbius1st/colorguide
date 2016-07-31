@@ -14,16 +14,19 @@ class ColorguideUiView extends View
 
   divisionTitle = null
   divisionSubTitle = null
+  divisionDescription = null
 
   dataNameA = null
   titleA = null
   prefixA = null
   varsA = null
+  versionA = null
 
   dataNameB = null
   titleB = null
   prefixB = null
   varsB = null
+  versionB = null
 
   partA = null
   partB = null
@@ -33,24 +36,16 @@ class ColorguideUiView extends View
       @div class: 'inset-panel', =>
         @h2 divisionTitle
         @h4 divisionSubTitle
-        @div class: 'panel-body', =>
-          @div class: 'bar', ''
-          @button 'data-name': dataNameA, class: 'btn-division-header', click: 'toggle', titleA
-          @div id: dataNameA, class: 'atom-panel top padded-right bordered', =>
-            itemInfo.push @addListItems(varsA.variables(),
-                          varsA.groups(), varsA.categories(), prefixA)
+        @h4 divisionDescription
 
-        @div class: 'panel-body', =>
-          @div class: 'bar', ''
-          @button 'data-name': dataNameB, class: 'btn-division-header', click: 'toggle', titleB
-          @div id: dataNameB, class: 'atom-panel top padded-right bordered', =>
-            itemInfo.push @addListItems(varsB.variables(),
-                            varsB.groups(), varsB.categories(), prefixB)
+        itemInfo.push @addPanel(titleA, dataNameA, varsA, prefixA, versionA)
+        itemInfo.push @addPanel(titleB, dataNameB, varsB, prefixB, versionB)
 
   constructor: (params) ->
 
     divisionTitle = params.title
     divisionSubTitle = params.subTitle
+    divisionDescription = params.description
 
     itemInfoPartA = null
     itemInfoPartB = null
@@ -66,6 +61,7 @@ class ColorguideUiView extends View
     dataNameA = partA.prefix + 'Vars'
     titleA = partA.title
     prefixA = partA.prefix
+    versionA = partA.version
 
     if fileLocationA != ''
       varsA = require fileLocationA
@@ -73,6 +69,7 @@ class ColorguideUiView extends View
     dataNameB = partB.prefix + 'Vars'
     titleB = partB.title
     prefixB = partB.prefix
+    versionB = partB.version
 
     if fileLocationB != ''
       varsB = require fileLocationB
@@ -81,6 +78,9 @@ class ColorguideUiView extends View
 
   getItemInfo: ->
     itemInfo
+
+  resetItemInfo: ->
+    itemInfo = []
 
   initialize: ->
 
@@ -99,20 +99,3 @@ class ColorguideUiView extends View
       $(leClass).removeClass('hide')
     else
       $(leClass).addClass('hide')
-
-  # attached: ->
-    # window.alert('at attached' + '\n' +
-    #   'count: ' + intCount + '\n' +
-    #   'A count: ' + itemInfoPartA.itemCount  + '\n' +
-    #   'A prefix: ' + itemInfoPartA.itemPrefix   + '\n' +
-    #   'B count: ' + itemInfoPartB.itemCount  + '\n' +
-    #   'B prefix: ' + itemInfoPartB.itemPrefix
-    #   )
-
-    # if itemInfoPartA.itemCount > 0
-    #   for i in [1 ... itemInfoPartA.itemCount] by 1
-    #     colorUtil.showColorValues('#' + itemInfoPartA.itemPrefix + i)
-    #
-    # if itemInfoPartB.itemCount > 0
-    #   for i in [1 ... itemInfoPartB.itemCount] by 1
-    #     colorUtil.showColorValues('#' + itemInfoPartB.itemPrefix + i)
