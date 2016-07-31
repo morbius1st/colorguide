@@ -39,6 +39,23 @@ This is an example of how to configure the seti-ui theme:
 
 ![Sceenshot](https://cloud.githubusercontent.com/assets/17919240/17276989/d02f093a-56ec-11e6-9fa8-8ab3e7a6a2ec.png?raw=true)
 
+The background color of the four color bars are set by default to: 
+- Top: #ffffff (white)
+- Middle-top: #808080 (gray)
+- Middle-bottom: #000000 (black)
+- Bottom: the editor background color.
+
+The first three background colors can be changed separately for each variable.  In the `.coffee` files, modify a `new cgVarColor()` object to include additional parameter(s):
+
+`new cgVarColor(idx, group, category, name, desc, 'top color', 'mid-top color', 'mid-bottom color')`
+
+For example, to change the background color of the top color bar for `text-color-success`, modify the line in the file
+'colorguide/lib/cg-variables-ui-required.coffee' line this:
+
+`new cgVarColor(0.060, g.GRPur1.key, c.CATur1.key, 'text-color-success', 'General Text Color - Success (Green)', '#000080')`
+
+This will produce this result:
+
 
 
 
