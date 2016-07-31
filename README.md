@@ -33,4 +33,15 @@ This is an example of how to configure the seti-ui theme:
 - copy the folder `colorguide/examples/seti-ui/lib/colorguide` into `seti-ui/lib/colorguide`
 - copy the folder `colorguide/examples/seti-ui/styles/colorguide` into `seti-ui/styles/colorguide`
 - add the two import statement into `ui-variables.less` per the file `colorguide/examples/seti-ui/styles/add to ui-variables.less.txt`
+- restart or reload Atom - and, of course, make sure that `seti-ui` is the ui theme
+
+### Color Graph Modifications
+
+
+
+
+
+
+
+
 
