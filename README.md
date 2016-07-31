@@ -14,7 +14,6 @@ Colorguide will display the "final" values of the **custom** colors and color va
 
 Unfortunately, in order to do this, I must add files into the theme and modify one file.  This is nesessary in order to obtain the actual values assigned to each variable.
 
-
 ## Configuration
 
 Colorguide comes with configuration files for several of the popular themes:
@@ -30,3 +29,8 @@ I did not make configuration files for the out-of-the-box themes because:
 ### Configure A theme
 
 This is an example of how to configure the seti-ui theme:
+
+- copy the folder `colorguide/examples/seti-ui/lib/colorguide` into `seti-ui/lib/colorguide`
+- copy the folder `colorguide/examples/seti-ui/styles/colorguide` into `seti-ui/styles/colorguide`
+- add the two import statement into `ui-variables.less` per the file `colorguide/examples/seti-ui/styles/add to ui-variables.less.txt`
+
