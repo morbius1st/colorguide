@@ -1,3 +1,0 @@
-// these two lines must be added to the ui-variables.less (or equivalent) file
-@import "./colorguide/cg-variables-ui-custom";
-@import "./colorguide/cg-variables-ui-colors";

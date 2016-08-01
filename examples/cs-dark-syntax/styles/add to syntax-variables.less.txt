@@ -1,0 +1,3 @@
+// these two lines must be added to the syntax-variables.less (or equivalent) file
+@import "./colorguide/cg-variables-syntax-custom";
+@import "./colorguide/cg-variables-syntax-colors";

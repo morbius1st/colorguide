@@ -2,6 +2,15 @@
 # xxx-ui
 # ui custom color definitions
 
+# notes:
+# for "groups" and "categories", the 'key' must match the object name exactly and
+# the object / key names must be unique for a theme
+# the 'value' field is a number used for sorting and can be any number you like
+# the sorting of the "variables" is the sum of
+# the "group" 'value', the "categories" 'value', and the varaibles value (first number)
+# I did this so that groups / categories and be re-ordered bu just changing the 'value'
+# - The variable description field is optional and defaults to an empty string
+
 cgVarColor = require '../../../colorguide/lib/cg-variable-color'
 
 module.exports =
