@@ -3,7 +3,12 @@
   "main": "./lib/colorguide",
   "version": "0.0.0",
   "description": "A colorguide to the current UI & Syntax colors",
-  "keywords": [],
+  "keywords": [
+    "theme colors",
+    "colors",
+    "syntax colors",
+    "ui colors"
+  ],
   "activationCommands": {
     "atom-workspace": "colorguide:show"
   },
